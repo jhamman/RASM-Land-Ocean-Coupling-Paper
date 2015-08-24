@@ -10,11 +10,11 @@ This paper is written in latex and can be compiled into a pdf using the `pdflate
 
 To build a pdf once:
 
-```make once```
+    make once
 
 or to continually update the pdf as you make edits, simply:
 
-```make```
+    make
 
 -------
 
