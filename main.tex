@@ -75,7 +75,7 @@
 %  after the references.
 %
 %  Uncomment the following command to include .eps files
-%  \usepackage[dvips]{graphicx}
+ \usepackage[dvips]{graphicx}
 %
 %  Uncomment the following command to allow illustrations to print
 %   when using Draft:
@@ -198,7 +198,7 @@ Additionally, heat delivered with runoff combined with the ice-albedo effect can
 Finally, long-term river runoff maintains the surface freshwater layer in the Arctic Ocean and is a critical and necessary source required to balance freshwater export through Fram Strait and the Canadian Arctic Archipelago into the North Atlantic.
 
 Approximately 11\% of the global terestrial runoff drains into the Arctic Ocean, which holds only 1\% of the Earth's saltwater \citep{Lewis_2000,Lammers_2001}.
-Streamflow comprises approximately 38\% of the total freshwater input into Arctic Ocean \cite{Serreze_2006}, and during the spring and summer months, that fraction is much larger.
+Streamflow comprises approximately 38\% of the total freshwater input into Arctic Ocean \citep{Serreze_2006}, and during the spring and summer months, that fraction is much larger.
 Across the Arctic region, the annual runoff hydrograph is characterized by a large spring freshet, with approximately 60\% of the annual runoff volume occurring between April and July \citep{Lammers_2001}.
 
 Numerous observational studies have explored the seasonal and inter-annual behavior of Arctic runoff.
@@ -241,7 +241,7 @@ The analysis presented compares simulated streamflow to observations at streamfl
 
 The Regional Arctic System Model (RASM) is a fully coupled, high spatial and high temporal resolution regional climate model applied over the pan-Arctic domain, and has been recently developed under the support of the Department of Energy Earth System Modeling program.
 Principle goals of the modeling project are to better understand the interaction between physical systems in the Arctic drainage basin, to advance understanding of past and present states of Arctic climate, and to improve seasonal to multi-decadal prediction capabilities of key Arctic indicators.
-Existing model components, typically run off-line of one another are coupled using the Community Earth System Model (CESM) coupled model framework and the CPL7 flux coupler \cite{Craig_2011}.
+Existing model components, typically run off-line of one another are coupled using the Community Earth System Model (CESM) coupled model framework and the CPL7 flux coupler \citep{Craig_2011}.
 Below, we provide a brief description of the five component models in RASM version 1.0.
 The reader is encouraged to see the cited RASM specific references for more information on the specific implementation of individual component models.
 For the purposes of this paper, we are principally concerned with the coastal streamflow flux and its role in the Arctic Ocean system.
@@ -249,10 +249,10 @@ For the purposes of this paper, we are principally concerned with the coastal st
 \begin{enumerate}
 \item CICE: The Los Alamos Sea Ice model \citep{Hunke_2010} is physically based dynamic sea ice model.
 \citet{Roberts_2015b} provide a description of the application of CICE, version 5, within RASM.
-\item POP: The Parallel Ocean Program model \cite{Smith_2010} is a general circulation ocean model.
+\item POP: The Parallel Ocean Program model \citep{Smith_2010} is a general circulation ocean model.
 Osinski et al. [Manuscript in Preparation] provide a description of the application of POP, version 2, within RASM.
 Relevant to this study, POP uses a virtual salinity flux to represent changes in ocean salinty due to surface fluxes of freshwater (runoff, precipitation, and evaporation).
-\item VIC: The Variable Infiltration Capacity model \cite{Liang_1996} is a macroscale land surface hydrology model.
+\item VIC: The Variable Infiltration Capacity model \citep{Liang_1996} is a macroscale land surface hydrology model.
 \citet{Hamman_2015} provide a description of the application of VIC, version 4, within RASM.
 \item WRF: The Weather Research and Forecasting atmospheric model \citep{Skamarock_2007} is a mesoscale meteorological model.
 DuVivier and Cassano [Manuscript in Preparation] and Cassano et al. [Manuscript in Preparation] provide a detailed description of the WRF model, version 3.2, as it is applied in RASM.
@@ -266,7 +266,7 @@ Models are coupled every 20 minutes in the configuration described by \citet{Rob
 
 \subsection{RVIC}
 
-The RVIC streamflow routing model is a modified version of the routing model typically used to post-process VIC model output \cite{Lohmann_1996, Lohmann_1998a}.
+The RVIC streamflow routing model is a modified version of the routing model typically used to post-process VIC model output \citep{Lohmann_1996, Lohmann_1998a}.
 The original \citet{Lohmann_1996} model has been used in many offline modeling studies across spatial scales from 1/16$^{\circ}$ to 2$^{\circ}$ \citep[.e.g.][]{Nijssen_1997,Lohmann_1998b,Su_2005}.
 The routing model is a source-to-sink model that solves a linearized version of the Saint-Venant equations.
 The model has two distinct steps, the preprocessing step where linear time invariant impulse response functions (IRFs) are developed (see sections 2.2.1 and 2.2.2), and a the convolution step where distributed runoff from the land surface model is routed to downstream points (2.2.3).
@@ -312,7 +312,7 @@ The Saint-Venant equations are solved to determine flow response from every sour
 
 The development of the impulse response functions may be done on a high resolution (e.g. 1/16$^{\circ}$) flow network such as the one developed by \citet{Wu_2011}.
 Whereas the typical employment of the \citet{Lohmann_1996} model requires that the flow direction grid and the land surface model grid match, the RVIC implementation first upscales and aggregates the high resolution IRF grid to the RASM grid (Figure 2).
-The upscaling process uses the first-order conservative remapping technique developed by \cite{Jones_1999}.
+The upscaling process uses the first-order conservative remapping technique developed by \citep{Jones_1999}.
 Because the remapping scheme is conservative, the unit response to runoff (unit hydrograph) from each source grid cell is maintained.
 Finally, the regridded IRFs are aggregated to include all basins flowing into a single outlet grid cell.
 
@@ -544,9 +544,9 @@ Supercomputing resources were provided through the United States Department of D
 % EXAMPLE FIGURE
 %
 % \begin{figure}
-% \noindent\includegraphics[width=20pc]{samplefigure.eps}
+% \noindent\includegraphics[width=20pc,natwidth=1,nat]{figs/Figure_1.png}
 % \caption{Caption text here}
-% \label{figure_label}
+% \label{Figure 1:}
 % \end{figure}
 
 
