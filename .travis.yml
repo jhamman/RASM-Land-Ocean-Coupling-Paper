@@ -14,5 +14,6 @@ addons:
       - texlive-fonts-extra
       - dvipng
       - texlive-latex-recommended
+      - texlive-humanities
 script:
 - make once
