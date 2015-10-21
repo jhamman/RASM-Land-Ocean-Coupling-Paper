@@ -18,4 +18,4 @@ or to continually update the pdf as you make edits, simply:
 
 -------
 
-*Note: This paper is in a draft stage and should not be distributed without the authors permission.*
+*Note: This paper is in a draft stage and should not be distributed without the authors' permission.*
