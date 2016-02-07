@@ -46,7 +46,7 @@
 % (If you are submitting to a journal other than jgrga,
 % substitute the initials of the journal for "jgrga" below.)
 
-\documentclass[ms, draft]{agutex}
+\documentclass[jgrga, draft]{agutex}
 % To create numbered lines:
 
 % If you don't already have lineno.sty, you can download it from
@@ -209,18 +209,21 @@ These stratifying processes serves to limit the heat flux into the mixed layer f
 % [ocean / sea ice specific studies]
 The importance of the terestrial freshwater flux has been shown to be an important driver of ice-ocean dynamics in coupled ice-ocean models.
 \citet{Newton_2008} applied observed climatological runoff at the largest nine rivers in the Arctic basin and used dye tracers to visualize the spatial distribution of runoff; finding the highest concetrations of river runoff along the Siberian coast.
-Despite our knowledge of the importance of river runoff in Arctic Ocean dynamics, \citet{Nummelin_2015} show that fully-coupled global climate models (GCMs) poorly represent the vertical structure of the Arctic Ocean, with many models failing to accurately reproduce the observed profiles of temperature and salinity in the upper 500 m.
+Despite our understanding of the importance of river runoff in Arctic Ocean dynamics, \citet{Nummelin_2015} show that fully-coupled global climate models (GCMs) poorly represent the vertical structure of the Arctic Ocean, with many models failing to accurately reproduce the observed profiles of temperature and salinity in the upper 500 m.
 
 Numerous observational and modeling studies have explored the seasonal and inter-annual behavior of Arctic runoff.
 \citet{Lammers_2001} compiled the R-ArcticNET database, a regional hydrographic record of monthly mean streamflow observations, including over 3,700 streamflow gauges.
-This dataset was used by \citet{Shiklomanov_2009} in their investigation of increasing river discharge in the largest Eurasian rivers and by \citep{Tan_2011} in their investigation of changes in spring snowmelt timing.
+R-ArcticNET was used by \citet{Shiklomanov_2009} in their investigation of increasing river discharge in the largest Eurasian rivers and by \citep{Tan_2011} in their investigation of changes in spring snowmelt timing.
+\citet{Dai_2009} extended the R-ArcticNET database through 2007 at coastal streamflow gauges.
 \citet{Adam_2007, Adam_2008, Su_2007, Dai_2009} all have used uncoupled land surface models, in conjunction with routing schemes to simulate streamflow across the pan-Arctic region.
+
 
 % [other climate models that include coupled land-ocean dynamics]
 Previous studies have included streamflow routing models within coupled climate models.
 Cell-to-cell routing methods, such as the River Transport Model \citep[RTM][]{Branstetter_2003} have been applied globally in a number of GCMs.
 These cell-to-cell models are typically difficult to parameterize across a range of spatial scales \citep{Sushama_2004}.
 \citep{Olivera_2000} introduced a similar source-to-sink streamflow routing model as the one applied here.
+Source-to-sink routing methods do not explicitly track streamflow between grid cells, rather they parameterize the distribution and travel time of runoff between the source grid cell and the outlet grid cell.
 However, in recent years, the literature has been mostly silent in terms of development of streamflow routing schemes coupled within earth system models.
 In fact, \citet{Bring_2015}, in their synthesis of CMIP5 runoff dynamics, conclude that a significant community effort should be made to improve the understanding and modeling of basin scale freshwater fluxes in coupled climate modeling.
 
@@ -331,11 +334,24 @@ Each runoff gridcell is mapped to the nearest ocean grid cell.
 The flux is then smoothed over all gridpoints in a 300 km radius with distance weighting e-folding scale of 1000 km such that the total quantity is conserved from runoff to ocean.
 This smoothing prevents excessively large and unrealistic runoff fluxes into any single ocean grid cell and encourages computational stability within the ocean model while representing the distributed changes in salinity due to the land-ocean freshwater flux.
 
+\subsection{Parameter Selection}
+
+A brute force parameter selection proceedure was performed to select the velocity and diffusion parameters for the RVIC model applied in RASM.
+The velocity parameter was varied between 0.2 and 1.5 m/s and the diffusion was veried between 500 and 4,000 m2/s.
+Individual pairs of parameters were evaluated using a modified version of the overlap statistic \citet{Perkins_2012}.
+The overlap statistic, which was originally introduced as a measure of likeness for prbability density functions, is applied here to the normalized mean monthly hydrographs of the six largest river basins in the study domain from RASM and the observations from \citet{Dai_2009} [figure].
+The pair of velocity and diffusions parameters, x and y respectively, was choosen to maximize the volume weighted composite overlap statisc for the largest six rivers in the RASM domain [figure].
+
 \section{Model Simulations and Data}
 
-In this paper, we present results from three RASM simulations.
-The first two simulations, $RASM_ERA$ \citep{Dee_2011} and $RASM_CFSR$ [citation?], are fully-coupled RASM version 1.0 simulations using the the ERA-Interim and CFSR boundary conditions repectively.
-The third simulation, $RASM_ERA_NOROF$ also uses ERA-Interim boundary conditions but the runoff flux from the land to the ocean is turned off.
+In this paper, we present results from three RASM simulations, each using ERA-Interim boundary conditions, $RASM_ERA$, $RASM_ERA_FAST$, and $RASM_ERA_NOROF$ using RASM version 1.0.
+All three simulations uses the same land, atmosphere, ocean, and sea ice model configurations and only differ in the following ways:
+\begin{itemize}
+\item $RASM_CONTROL$: uses the calibrated RVIC parameters described above.
+\item $RASM_FAST$ uses RVIC velocity and diffusion parameters of 2.0 m/s and 2,000 m2/s.
+\item $RASM_NOROF$ does not include the runoff flux from the land to the ocean.
+\end{itemize}
+
 Although all three simulations began on September 1, 1979, we use an analysis period of January 1, 1990 and December 31, 2009, allowing for a 10 year model spinnup.
 Model components were coupled every 20 minutes using the coupling scheme described in \citep{Roberts_2015a}.
 
@@ -350,7 +366,6 @@ The period of record for each basin varies and only basins that included observa
 Our analysis of the annual streamflow hydrograph extends the results of \citet{Hamman_2015} to the monthly timescale.
 Figure X shows the RVIC routed annual hydrograph at six select streamflow gauge locations, compared to observations, and to the unrouted runoff flux.
 At each of these streamflow gauge locations, RASM simulates the spring freshet in May or June, although typically peaking a month prior to the observations.
-% Note: Figure is not up to date.
 
 Figure Xa compares the fraction of the annual flow volume that occurs between April and July between the $RASM_ERA$ simulation and the observations.
 Figure Xb compares the center of mass of the annual hydrograph between the $RASM_ERA$ simulation and the observations.
@@ -532,6 +547,17 @@ Supercomputing resources were provided through the United States Department of D
 \end{article}
 %
 %
+
+% figures:
+%
+% 1.  RASM domain showing river and ocean basins
+% 2.  Normalized calibration hydrographs for largest 6 river basins
+% 3.  Composite parameter space performance
+% 4.  Typical hydrographs for largest 6 river basins
+% 5.  Surface ocean salinity (spatial plots, 3 or 4 subplots)
+% 6.  Salinity and temperature plots for the central arctic ocean basins (see nummelin 2015 figure 1).
+% 7.  Differences in seaice for the three RASM simulations
+
 %% Enter Figures and Tables here:
 %
 % DO NOT USE \psfrag or \subfigure commands.
