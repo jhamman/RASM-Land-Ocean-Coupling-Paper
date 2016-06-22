@@ -231,8 +231,8 @@ However, there has not been significant research applied to understanding the ro
 Previous studies have included streamflow routing models within coupled climate models.
 Cell-to-cell routing methods, such as the River Transport Model \citep[RTM][]{Branstetter_2003} have been applied globally in a number of GCMs, including in the Community Earth System Model [CESM].
 These cell-to-cell models are typically difficult to parameterize across a range of spatial scales \citep{Sushama_2004}.
-\citep{Olivera_2000} introduced a similar source-to-sink streamflow routing model as the one used in the RVIC model.
-Source-to-sink routing methods do not explicitly track streamflow between grid cells, rather they parameterize the distribution and travel time of runoff between the source grid cell and the outlet grid cell.
+Source-to-sink routing models, akin to the RVIC model used in this study, have also been previously applied in coupled models \citep[e.g.][]{Olivera_2000}.
+Source-to-sink routing methods do not explicitly track streamflow between grid cells, rather they parameterize the distribution and travel time of runoff between a source grid cell and an outlet grid cell.
 However, in recent years, the literature has been mostly silent in terms of development of streamflow routing schemes coupled within earth system models.
 In fact, \citet{Bring_2015}, in their recent synthesis of CMIP5 runoff dynamics, conclude that a significant community effort should be made to improve the understanding and modeling of basin scale freshwater fluxes in coupled climate modeling.
 This notion is further echoed by \citet{Lique_2015} in their review paper of the representation of the Arctic hydrologic cycle in coupled climate models.
@@ -259,9 +259,16 @@ For the purposes of this paper, we are principally concerned with the coastal st
 \citet{Roberts_2015b} provide a description of the application of CICE, version 5, within RASM.
 \item POP: The Parallel Ocean Program model \citep{Smith_2010} is a general circulation ocean model.
 Osinski et al. [Manuscript in Preparation] provide a description of the application of POP, version 2, within RASM.
-Of particular relevance to this study, POP uses a virtual salinity flux to represent changes in ocean salinity due to surface fluxes of freshwater (runoff, precipitation, and evaporation). [<<Robert to expand here as needed>>]
+Of particular relevance to this study, POP uses a virtual salinity flux to represent changes in ocean salinity due to surface fluxes of freshwater (runoff, precipitation, and evaporation).
+The virtual salt flux is calculated as
+\begin{equation}
+     VSF= -F_w S
+\end{equation}
+
+where $F_w$ is a sum of the fluxes from streamflow, precipitation, evaporation, and sea ice melting and freezing. $S$ is reference salinity, which is a surface salinity of grid cell where input of fresh water is taking place.
+
 \item VIC: The Variable Infiltration Capacity model \citep{Liang_1996} is a macroscale land surface hydrology model.
-\citet{Hamman_2015} provide a description of the application of VIC, version 4, within RASM.
+\citet{Hamman_2016} provide a description of the application of VIC, version 4, within RASM.
 \item WRF: The Weather Research and Forecasting atmospheric model \citep{Skamarock_2007} is a mesoscale meteorological model.
 \citet{Cassano_2015} provide a detailed description of the WRF model, version 3.2, as it is applied in RASM.
 \item RVIC: The RVIC streamflow routing model is an adapted version of the \citet{Lohmann_1996} linear routing model frequently used to route the runoff flux from the VIC model.
@@ -276,7 +283,7 @@ Models are coupled every 20 minutes in the configuration described by \citet{Rob
 \label{sec:rvic}
 
 The RVIC streamflow routing model is a modified version of the routing model typically used to post-process VIC model output \citep{Lohmann_1996, Lohmann_1998a}.
-The original \citet{Lohmann_1996} model has been used in many offline modeling studies across spatial scales from 1/16$^{\circ}$ to 2$^{\circ}$ \citep[.e.g.][]{Nijssen_1997,Lohmann_1998b,Su_2005}.
+The original \citet{Lohmann_1996} model has been used in many offline modeling studies across spatial scales from 1/16$^{\circ}$ to 2$^{\circ}$ \citep[e.g.][]{Nijssen_1997,Lohmann_1998b,Su_2005}.
 RVIC is a source-to-sink model that solves a linearized version of the Saint-Venant equations.
 The model has two distinct steps, the preprocessing step where linear time invariant impulse response functions [IRFs] are developed (see sections ~\ref{sec:irfs} and ~\ref{sec:remap}), and a the convolution step where distributed runoff from the land surface model is routed to downstream points (see section~\ref{sec:convolution}).
 
@@ -322,7 +329,7 @@ The Saint-Venant equations are solved to determine flow response from every sour
 \label{sec:remap}
 
 The development of the impulse response functions may be done on a high resolution (e.g. 1/16$^{\circ}$) flow network such as the one developed by \citet{Wu_2011}.
-Whereas the typical employment of the \citet{Lohmann_1996} model requires that the flow direction grid and the land surface model grid match exactly, the RVIC implementation first upscales and aggregates the high resolution IRF grid to the land surface model grid [Figure 2].
+Whereas the typical employment of the \citet{Lohmann_1996} model requires that the flow direction grid and the land surface model grid match exactly, the RVIC implementation first upscales and aggregates the high resolution IRF grid to the land surface model grid [\ref{fig:2}].
 The upscaling process uses the first-order conservative remapping technique developed by \citep{Jones_1999}.
 Because the remapping scheme is conservative, the unit response to runoff (unit hydrograph) from each source grid cell is maintained.
 Finally, the regridded IRFs are aggregated to include all basins flowing into a single outlet grid cell.
@@ -355,65 +362,70 @@ IRFs were developed for each of the 95,001 coastal 1/16$^{\circ}$ grid cells bor
 \label{sec:parameters}
 
 A brute force parameter selection procedure was performed to select the velocity and diffusion parameters for the RVIC model applied in RASM.
-For this procedure, RVIC was run offline of RASM at a daily timestep and was forced using daily runoff fluxes from the fully coupled RASM simulation described as $RASM_{ERA}$ in \citep{Hamman_2015}.
+For this procedure, RVIC was run offline of RASM at a daily timestep and was forced using daily runoff fluxes from the fully coupled RASM simulation described as $RASM_{ERA}$ in \citep{Hamman_2016}.
 The velocity parameter was varied between 0.2 and 1.5 m/s and the diffusion was varied between 500 and 4,000 m\textsuperscript{2}/s.
 Individual pairs of parameters were evaluated using a modified version of the overlap statistic \citet{Perkins_2012}.
-The overlap statistic, which was originally introduced as a measure of likeness for probability density functions, is applied here to the normalized mean monthly hydrographs of the six largest river basins in the study domain from RASM and the observations from \citet{Dai_2009} [figure].
-The overlap statistic is perhaps the best performance measure of the routing model because it focuses entirely on the shape of the hydrograph and does not take into account bias in the flow volume which is determined by the land surface model (See Figure\ref{fig:3}).
-The pair of velocity and diffusions parameters, 0.6 m/s and 3,000 m\textsuperscript{2}/s respectively, was chosen to maximize the volume weighted composite overlap statistic for the largest six rivers in the RASM domain (See Figure\ref{fig:4}).
+The overlap statistic, which was originally introduced as a measure of likeness for probability density functions, is applied here to the normalized mean monthly hydrographs of the six largest river basins in the RASM model domain [Figure \ref{fig:1}] and the observations from \citet{Dai_2009}.
+The overlap statistic is perhaps the best performance measure of the routing model because it focuses entirely on the shape of the hydrograph and does not take into account bias in the flow volume which is determined by the land surface model (See Figure \ref{fig:3}).
+The pair of velocity and diffusions parameters, 0.6 m/s and 3,000 m\textsuperscript{2}/s respectively, was chosen to maximize the volume weighted composite overlap statistic for the largest six rivers in the RASM domain (See Figure \ref{fig:4}).
 
 \section{Model Simulations and Data}
 
-In this paper, we present results from three RASM simulations, each using ERA-Interim boundary conditions, $RASM-CONTROL$, $RASM-FAST$, and $RASM-NOROF$ using RASM version 1.0 (Tag R1009).
+In this paper, we present results from two RASM simulations, each using ERA-Interim boundary conditions, $RASM_{CONTROL}$, and $RASM_{NOROF}$ using RASM version 1.0 (Tag R1010).
+We also highlight the impact of the calibration procedure with a offline RVIC simulation, $RVIC_{FAST}$, forced with runoff fluxes from $RASM_{CONTROL}$.
 All three simulations were run from September 1, 1979 through December 31, 2014, however we use an analysis period of January 1, 1990 and December 31, 2014, allowing for a 10 year model spinnup.
-All three simulations begin with the same initial states (see \citet{Hamman_2015} for more details) and use the same land, atmosphere, ocean, and sea ice model configurations.
+Both RASM simulations began with the same initial states (see \citet{Hamman_2016} for more details) and use the same land, atmosphere, ocean, and sea ice model configurations.
 These simulations only differ in the following ways:
 \begin{itemize}
-\item $RASM-CONTROL$: uses the calibrated RVIC parameters described above.
-\item $RASM-FAST$ uses RVIC velocity and diffusion parameters of 2.0 m/s and 2,000 m\textsuperscript{2}/s. These parameters are frequently used as default parameters with the RVIC model and were the original parameters used when evaluating the model.
-\item $RASM-NOROF$ does not include the runoff flux from the land to the ocean.
+     \item $RASM_{CONTROL}$: uses the calibrated RVIC parameters described above.
+     \item $RASM_{NOROF}$: does not include the runoff flux from the land to the ocean.
+     \item $RVIC_{FAST}$: stand-alone RVIC simulation forced with $RASM_{CONTROL}$.
+          This simulation uses velocity and diffusion parameters of 2.0 m/s and 2,000 m\textsuperscript{2}/s.
+          These parameters are frequently used as default parameters with the RVIC model and were the original parameters used when evaluating the model.
 \end{itemize}
 
 We compare output from RASM simulations to streamflow observations in the \citet{Dai_2009} dataset.
 This dataset provides mean monthly streamflow observations at the most downstream gauging location for 42 individual river basins within the RASM domain and analysis period.
 
-[TODO: add Ocean Salinity dataset and citation]
-
 \section{Results}
 
 \subsection{Routed Streamflow Hydrographs}
 
-Our analysis of the streamflow hydrograph extends the results of \citet{Hamman_2015} to the monthly timestep.
-Figure \ref{fig:5} compares the monthly routed hydrographs for $RASM-CONTROL$ and $RASM-FAST$ at the six streamflow gauge locations shown in Figure \ref{fig:3} compared to the observations from \citep{Dai_2009}.
+Our analysis of the streamflow hydrograph extends the results of \citet{Hamman_2016} to the monthly timestep.
+Figure \ref{fig:5} compares the monthly routed hydrographs for $RASM_{CONTROL}$ and $RVIC_{FAST}$ at the six streamflow gauge locations shown in Figure \ref{fig:3} compared to the observations from \citep{Dai_2009}.
 The annual bias, annual overlap, and monthly RMSE statistics for these six monthly hydrographs are shown in Table\ref{table:1}.
-The $RASM-CONTROL$ hydrographs in the Amur, Lena, and Yukon basins match the observations best, with overlap statistics between X-X.
-In the Ob, Yenisey, and Mackenzie River basins, the $RASM-CONTROL$ routed streamflow suffers from positive biases in the winter and spring and negative biases in the summer.
+The $RASM_{CONTROL}$ hydrographs in the Amur, Lena, and Yukon basins match the observations best, with overlap statistics between X-X.
+In the Ob, Yenisey, and Mackenzie River basins, the $RASM_{CONTROL}$ routed streamflow suffers from positive biases in the winter and spring and negative biases in the summer.
 Consequently, the overlap statistics for these rivers are lower (X-X).
 In these basins, during the winter, it is clear that VIC is under estimating the baseflow flux.
-For most of the basins shown in Figure \ref{fig:5} the timing of the peak month in the $RASM-CONTROL$ simulation occurs in the same month as the observations.
+For most of the basins shown in Figure \ref{fig:5}, the timing of the peak month in the $RASM_{CONTROL}$ simulation occurs in the same month as the observations.
 The notable exception to this is in the Ob River basin, where the runoff regime is acutely influenced by extensive wetlands and permafrost, and the spring peak occurs a month early (May vs. June).
 Compared to the normalized hydrographs in Figure \ref{fig:4}, the majority of the disagreement in Figure \ref{fig:5} is due to the bias in the runoff flux, which is entirely controlled by the land surface model.
-See \citep{Hamman_2015} provide a more detailed, intermodel comparison of the runoff biases in RASM.
+\citet{Hamman_2016} provide a more detailed, intermodel comparison of the runoff biases in RASM.
 
-The peak spring freshet in $RASM-FAST$ occurs about one month earlier than in $RASM-CONTROL$.
-On average, this leads to overlap statistics that are about 15 percent lower than the $RASM-CONTROL$ simulation.
-The differences in the routing parameters used in the $RASM-CONTROL$ and $RASM-FAST$ simulations can be clearly identified in the annual cycle column of Figure \ref{fig:5}.
-The bias in timing of the peak spring freshet is mostly due to the difference in streamflow velocity (2.0 vs. 0.6 m/s), whereas the shape of the hydrograph is largely determined by the diffusivity parameter (2000 vs. 6000 m2/s).
+The peak spring freshet in $RVIC_{FAST}$ occurs about one month earlier than in $RASM_{CONTROL}$.
+On average, this leads to overlap statistics that are about 15 percent lower than the $RASM_{CONTROL}$ simulation.
+The differences in the routing parameters used in the $RASM_{CONTROL}$ and $RVIC_{FAST}$ simulations can be clearly identified in the annual cycle column of Figure \ref{fig:5}.
+The bias in timing of the peak spring freshet is mostly due to the difference in streamflow velocity (2.0 vs. 0.6 m/s), whereas the shape of the hydrograph is largely determined by the diffusivity parameter (2000 vs. 6000 m\textsuperscript{2}/s).
 [TODO: add bias and nse to timeseries, add overlap statistic to annual cycle or put it all in a table]
 
 Figure \ref{fig:6} shows a Taylor Diagram comparing the RASM simulated hydrographs at 42 observation locations.
 The Taylor diagram shows the correlation along the arc and the normalized standard deviation along the radius.
 The contours denote lines of equal root-mean-square error (RMSE) where zero is a correlation of 1.0 and a standard deviation of 1.0.
-While the correlation coefficients in $RASM-FAST$ are not distributed according to the flow magnitude, the largest basins in $RASM-CONTROL$ tend to perform better with correlation coefficients typically increasing by about 0.3.
+While the correlation coefficients in $RVIC_{FAST}$ are not distributed according to the flow magnitude, the largest basins in $RASM_{CONTROL}$ tend to perform better with correlation coefficients typically increasing by about 0.3.
 This is likely due to our choice to calibrate the runoff parameters using only the largest basins in the domain.
 While the correlations are shown to improve in all of the basins shown in Figure \ref{fig:6}, the standard deviations are not shown to be significantly impacted by the calibration.
 This indicates that the variability in the monthly timeseries in not significantly controlled by the routing model.
 
 \subsection{Role of high resolution coastal streamflow on ocean and sea ice dynamics}
-[ROBERT: This section could use your input. Comparison between CONTROL, NOROF, HCASE, GCASE]
+Runoff is a major source of freshwater to the Arctic Ocean (AO). It maintains the vertical stratification and may influence the ocean circulation.
+The freshwater content is vital property of AO.
+Comparing computational results (fig X and XX) there is a clear example how large the change is in Beaufort Gyre (BG).
+The change of runoff influence basin-scale hydrology.
+The BG, wind-driven ocean current accumulates freshwater in the Canada Basin.
 
 We begin by exploring the influence of coastal streamflow on the mean surface salinity and temperature across the RASM ocean domain.
-We compare the two fully coupled simulations ($RASM-CONTROL$ and $RASM-FAST$) and one partially coupled simulation ($RASM-NOROF$) to the PHC climatological dataset.
+We compare the two fully coupled simulations ($RASM_{CONTROL}$ and $RVIC_{FAST}$) and one partially coupled simulation ($RASM_{NOROF}$) to the PHC climatological dataset.
 In the control simulation, which has the most realistic streamflow timing, differences in the surface salinity are small...
 
 Observation [cite] and modeling \citep[e.g.][]{Nummelin_2015} based studies have indicated the importance of realistic streamflow fluxes in maintaining the observed stratified temperature and salinity profiles in the Arctic Ocean.
@@ -423,7 +435,7 @@ Figure \ref{fig:8} shows the average seasonal ocean basin temperature and salini
 
 \subsection{Impacts on the Arctic Climate System}
 The largest and most direct impact that the inclusion of the streamflow flux has within the Arctic climate system is on near coastal surface salinity in the ocean.
-We have shown that the fully coupled $RASM-CONTROL$ simulation better represents the upper ocean salinity than the $RASM-NOROF$ or $RASM-HCASE$...
+We have shown that the fully coupled $RASM_{CONTROL}$ simulation better represents the upper ocean salinity than the $RASM_{NOROF}$ or $RASM-HCASE$...
 
 \subsection{Routing Processes}
 The RVIC model is a source-to-sink linear routing model that uses time-invariant IRFs to route streamflow to coastal grid cells in RASM.
@@ -640,14 +652,14 @@ Supercomputing resources were provided through the United States Department of D
 \clearpage
 \begin{figure}
 \noindent\includegraphics[width=40pc,natwidth=1]{Figure_7}
-\caption{PLACEHOLDER: Seasonal mean surface ocean salinity for $RASM-CONTROL$, $RASM-FAST$, and $RASM-NOROF$ compared to PHC climatology.}
+\caption{PLACEHOLDER: Seasonal mean surface ocean salinity for $RASM_{CONTROL}$, $RVIC_{FAST}$, and $RASM_{NOROF}$ compared to PHC climatology.}
 \label{fig:7}
 \end{figure}
 
 \clearpage
 \begin{figure}
 \noindent\includegraphics[width=40pc,natwidth=1]{Figure_8}
-\caption{PLACEHOLDER: Seasonal mean ocean basin averaged depth prfiles of salinity and temperature for $RASM-CONTROL$, $RASM-FAST$, and $RASM-NOROF$ compared to PHC climatology.}
+\caption{PLACEHOLDER: Seasonal mean ocean basin averaged depth prfiles of salinity and temperature for $RASM_{CONTROL}$, $RVIC_{FAST}$, and $RASM_{NOROF}$ compared to PHC climatology.}
 \label{fig:8}
 \end{figure}
 
