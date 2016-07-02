@@ -192,38 +192,37 @@ All abbreviations used in the abstract are defined.
 
 \section{Introduction}
 
-We have implemented a horizontal river routing scheme representing the streamflow flux between the land and ocean model components within the recently developed Regional Arctic System Model [RASM].
+We have implemented a river routing scheme [RVIC] within the recently developed Regional Arctic System Model [RASM]\marginpar{needs reference; if there is no other paper to cite, use your own} to represent the streamflow flux between the land and ocean model components.
 In this paper, we introduce the RVIC streamflow routing model and describe its coupling within RASM.
-We evaluate the performance of RVIC in fully-coupled RASM simulations, comparing model simulated streamflows to in-situ observations.
+We evaluate the performance of RVIC in fully-coupled RASM simulations by comparing model simulated streamflows to in-situ observations.
 We then highlight the role of the streamflow flux in the ocean and sea-ice components in RASM, utilizing a set of sensitivity experiments aimed at understanding the importance of accurately representing streamflow in coupled climate simulations in the Arctic.
 
 Approximately 11\% of the global terrestrial runoff drains into the Arctic Ocean, which holds only 1\% of the Earth's saltwater \citep{Lewis_2000,Lammers_2001}.
-Streamflow is the largest contributor of freshwater to the Arctic Ocean and making up approximately 38\% of the total freshwater freshwater flux entering the Arctic Ocean \citep{Serreze_2006}.
-During the spring and summer months, the fractional contribution of freshwater to the Arctic from streamflow is much larger.
+Streamflow is the largest contributor of freshwater to the Arctic Ocean and makes up approximately 38\% of the total freshwater freshwater flux entering the Arctic Ocean \citep{Serreze_2006}. The remainder is largely consists of direct precipitation on the Arctic Ocean.
+This contribution shows a strong seasonality and during the spring and summer months, the fractional contribution of freshwater to the Arctic from streamflow is much larger than 38\%.
 Across the Arctic region, the annual runoff hydrograph is characterized by a prominent spring freshet, with approximately 60\% of the annual runoff volume occurring between April and July \citep{Lammers_2001}.
 
-The seasonal freshwater flux from the land to the ocean can play an important role in coastal ocean dynamics and hydrography, as well as to sea ice formation and melt \citep{Rabe_2011,Fichot_2013}.
+The seasonal freshwater flux from the land to the ocean can play an important role in coastal ocean dynamics and hydrography, as well as in sea ice formation and melt \citep{Rabe_2011,Fichot_2013}.
 Runoff from Arctic river basins is the primary source of buoyancy-driven currents such as the Alaska, Siberian, Norwegian, and East Greenland coastal currents \citep[e.g.][]{Morison_2000,Boyd_2002,McGeehan_2012}.
-Such currents redistribute both fresh water and heat, which locally play important roles in shelf dynamics and shelf-basin interactions.
-Another important aspect is the effect of buoyancy delivered by rivers on the onset of sea ice formation in winter and melt in spring/summer.
+These currents redistribute both fresh water and heat, which locally play important roles in shelf dynamics and shelf-basin interactions.
+Buoyancy delivered by rivers also affects the onset of sea ice formation in winter and melt in spring/summer.
 Less salty water freezes at higher temperatures, and therefore does not have to be cooled as much as higher salinity water to freeze.
-Thus, for a warming and freshening Arctic, the onset of freezing in areas highly influenced by streamflow may be partially buffered against regional warming.
+Thus, for a warming and freshening Arctic, the onset of freezing may be partially buffered against regional warming in areas highly influenced by streamflow.
 
-Long-term river runoff maintains the surface freshwater layer in the Arctic Ocean and is necessary to balance freshwater export through Fram Strait and the Canadian Arctic Archipelago into the North Atlantic.
-This freshwater layer is also important for maintaining the stratified structure of the Arctic Ocean \citep{Nummelin_2015}.
+Long-term river runoff balances freshwater export through Fram Strait and the Canadian Arctic Archipelago into the North Atlantic and consequently maintains the surface freshwater layer in the Arctic Ocean, which is important for maintaining the stratified structure of the Arctic Ocean \citep{Nummelin_2015}.
 Although warmer water (less dense) exists at depth in the Arctic Ocean, stratification is maintained by the density differences between the fresh mixed layer and the more saline halocline and Atlantic water layers.
-These stratifying processes serves to limit the heat flux into the mixed layer from below.
+These stratifying processes serve to limit the heat flux into the mixed layer from below.
 
 % [ocean / sea ice specific studies]
 The terrestrial freshwater flux has been shown to be an important driver of ice-ocean dynamics in coupled ice-ocean models \citep[e.g.][]{Lique_2015}.
-\citet{Newton_2008} applied observed climatological runoff at the largest nine rivers in the Arctic basin and used dye tracers to visualize the spatial distribution of runoff; finding the highest concentrations of river runoff along the Siberian coast.
+\citet{Newton_2008} applied observed climatological runoff at the largest nine rivers in the Arctic basin and used dye tracers \marginpar{I do not understand - ``dye'' tracers evokes the idea of physical tracers, while you appear to be talking about a model study here. Please clarify} to visualize the spatial distribution of runoff; finding the highest concentrations of river runoff along the Siberian coast.
 Despite our understanding of the importance of river runoff in Arctic Ocean dynamics, \citet{Nummelin_2015} show that fully-coupled global climate models [GCMs] poorly represent the vertical structure of the Arctic Ocean, with many models failing to accurately reproduce the observed profiles of temperature and salinity in the upper 500 m.
-They conclude that properly representing the streamflow flux is a key step toward improving the performance of the ocean model components in these models.
+They conclude that a properly representation of the streamflow flux is a key step toward improving the performance of the ocean model components in these models.
 
 Numerous observational and modeling studies have explored the seasonal and inter-annual behavior of Arctic runoff.
 \citet{Lammers_2001} compiled the R-ArcticNET database, a regional hydrographic record of monthly mean streamflow observations, including over 3,700 streamflow gauges.
 R-ArcticNET was used by \citet{Shiklomanov_2009} in their investigation of increasing river discharge in the largest Eurasian rivers and by \citet{Tan_2011} in their investigation of changes in spring snowmelt timing.
-\citet{Dai_2009} extended portions of the R-ArcticNET database through 2007 for a smaller collection of coastal streamflow gauges.
+\citet{Dai_2009} extended portions of the R-ArcticNET database through 2007 for a subset of coastal streamflow gauges.
 \citet{Adam_2007}, \citet{Adam_2008}, \citet{Su_2005}, and \citet{Dai_2009} all have used uncoupled land surface models, in conjunction with routing schemes to simulate streamflow across the pan-Arctic region.
 These studies have all led to improved understanding of the terrestrial hydroclimate in the Arctic and how the seasonal streamflow dynamics in the Arctic basin respond to changes in climate and water management activities.
 However, there has not been significant research applied to understanding the role of streamflow in coupled processes in the Arctic.
@@ -233,7 +232,7 @@ Previous studies have included streamflow routing models within coupled climate 
 Cell-to-cell routing methods, such as the River Transport Model \citep[RTM][]{Branstetter_2003} have been applied globally in a number of GCMs, including in the Community Earth System Model [CESM].
 These cell-to-cell models are typically difficult to parameterize across a range of spatial scales \citep{Sushama_2004}.
 Source-to-sink routing models, akin to the RVIC model used in this study, have also been previously applied in coupled models \citep[e.g.][]{Olivera_2000}.
-Source-to-sink routing methods do not explicitly track streamflow between grid cells, rather they parameterize the distribution and travel time of runoff between source and outlet grid cells.
+Source-to-sink routing methods do not explicitly track streamflow between grid cells. Instead, they parameterize the distribution and travel time of runoff between source and outlet grid cells.\marginpar{Need to make clear how the approach here differs. As-is, it is a setup for reviewers to complain: ``What's new?''. So explain in a few lines how your approach differs}
 However, in recent years, the literature has been mostly silent in terms of development of streamflow routing schemes coupled within earth system models.
 In fact, \citet{Bring_2015}, in their recent synthesis of CMIP5 runoff dynamics, conclude that a significant community effort should be made to improve the understanding and modeling of basin scale freshwater fluxes in coupled climate modeling.
 This notion is further echoed by \citet{Lique_2015} in their review paper of the representation of the Arctic hydrologic cycle in coupled climate models.
@@ -245,14 +244,14 @@ The analysis presented here compares simulated streamflow to observations at str
 \section{Models}
 
 \subsection{RASM}
-\label{sec:rasm}
+\label{sec:rasm}\marginpar{Would be nice if we could shorten this, but without a solid RASM reference not sure that is possible. Leave as-is for now.}
 
 The Regional Arctic System Model [RASM] is a fully coupled, high spatial and high temporal resolution regional earth system model applied over the pan-Arctic domain.
 RASM has recently been developed under the support of the Department of Energy Earth System Modeling program.
-Principle goals of the modeling project are to better understand the interaction between physical systems in the Arctic drainage basin, to advance understanding of past and present states of Arctic climate, and to improve seasonal to multi-decadal prediction capabilities of key Arctic indicators.
+Principal goals of the modeling project are to better understand the interaction between physical systems in the Arctic drainage basin, to advance understanding of past and present states of Arctic climate, and to improve seasonal to multi-decadal prediction capabilities of key Arctic indicators.
 Existing model components, typically run off-line of one another are coupled using the CESM coupled model framework and the CPL7 flux coupler \citep{Craig_2011}.
 Below, we provide a brief description of the five component models in RASM version 1.0 [Figure \ref{fig:1}a].
-For brevity's sake, the reader is encouraged to see the cited RASM specific references for more information on the specific implementation of individual component models.
+For brevity's sake, the reader is referred to the RASM-specific references for more information on the specific implementation of individual component models.
 For the purposes of this paper, we are principally concerned with the coastal streamflow flux and its role in the Arctic Ocean system, therefore our description below mainly focuses on the streamflow and ocean model components.
 
 \begin{enumerate}
@@ -268,8 +267,8 @@ The virtual salt flux is calculated as
 
 where $F_w$ is a sum of the fluxes from streamflow, precipitation, evaporation, and sea ice melting and freezing. $S$ is reference salinity, which is a surface salinity of grid cell where input of fresh water is taking place.
 
-\item VIC: The Variable Infiltration Capacity model \citep{Liang_1996} is a macroscale land surface hydrology model.
-\citet{Hamman_2016} provide a description of the application of VIC, version 4, within RASM.
+\item VIC: The Variable Infiltration Capacity model \citep{Liang_1994}\marginpar{Please use Liang et al. 1994 as the primary VIC reference} is a macroscale land surface hydrology model.
+\citet{Hamman_2016} provide a description of the application of VIC within RASM.
 \item WRF: The Weather Research and Forecasting atmospheric model \citep{Skamarock_2007} is a mesoscale meteorological model.
 \citet{Cassano_2016} provide a detailed description of the WRF model, version 3.2, as it is applied in RASM.
 \item RVIC: The RVIC streamflow routing model is an adapted version of the \citet{Lohmann_1996} linear routing model frequently used to route the runoff flux from the VIC model.
@@ -278,86 +277,88 @@ A complete description of the RVIC model is provided in section~\ref{sec:rvic}.
 
 In RASM Version 1.0, the land, atmosphere, and runoff components share a 50-km near-equal-area North Pole stereographic grid mesh.
 The ocean and sea ice models share a 1/12$^{\circ}$ rotated stereographic grid mesh [Figure \ref{fig:1}b].
-Models are coupled every 20 minutes in the configuration described by \citet{Roberts_2015a}.
+Models are coupled every 20 minutes in the configuration described by \citet{Roberts_2015a}.\marginpar{Describe in one sentence why this coupling frequency is important - \citet{Roberts_2015a} makes that clear}
 
 \subsection{RVIC}
 \label{sec:rvic}
 
 The RVIC streamflow routing model is a modified version of the routing model typically used to post-process VIC model output \citep{Lohmann_1996, Lohmann_1998a}.
 The original \citet{Lohmann_1996} model has been used in many offline modeling studies across spatial scales from 1/16$^{\circ}$ to 2$^{\circ}$ \citep[e.g.][]{Nijssen_1997,Lohmann_1998b,Su_2005}.
-RVIC is a source-to-sink model that solves a linearized version of the Saint-Venant equations.
-The model has two distinct steps, the preprocessing step where linear time invariant impulse response functions [IRFs] are developed (see sections ~\ref{sec:irfs} and ~\ref{sec:remap}), and a the convolution step where distributed runoff from the land surface model is routed to downstream points (see section~\ref{sec:convolution}).
+RVIC is a source-to-sink model that solves a linearized version of the Saint-Venant equations.\marginpar{needs a reference and a one-line description of what the Saint-Venant equations are}
+The model has two distinct steps, a preprocessing step in which linear time invariant impulse response functions [IRFs] are developed (see sections ~\ref{sec:irfs} and ~\ref{sec:remap}), and a  convolution step in which distributed runoff from the land surface model is routed to downstream points (see section~\ref{sec:convolution}).
 
 The RVIC model differs from the original \citet{Lohmann_1996} model in four main ways:
 
 \begin{enumerate}
 \item RVIC completely separates the development of the IRFs from the flow convolution step,
-\item RVIC allows the development of the IRFs to be done on flow direction grids that do not match that of the land model (see section~\ref{sec:irfs}),
+\item RVIC allows the development of the IRFs to be done on flow direction grids that do not match the grid elements used for the land model (see section~\ref{sec:irfs}),
 \item The RVIC convolution scheme operates in a space-before-time pattern, facilitating direct coupling with land surface models (see section~\ref{sec:convolution}),
 \item RVIC includes numerous infrastructure improvements, including parallel processing, the ability to store the model state, and to read and write netCDF files.
 \end{enumerate}
 
 \subsubsection{Impulse response function development}
-\label{sec:irfs}
+\label{sec:irfs}\marginpar{You need a bit more of a lead in that explains all the pieces and how they fit together - as I am reading this section it is rather unclear why I am reading this. Why are we using IRFs rather than tracking the flow through the channel or using a reach-based routing model. You have to give some background before you launch into IRF and Green's functions. Be kind to your readers and tell a story}
 
-The source-to-sink response of flow from any model grid cell to a downstream (outlet) point is represented as a linear and time invariant response to an impulse of runoff.
-Therefore, the development of the IRF between any source and sink points may be described as a function of the horizontal travel time of water within the source grid cell and to the downstream point with the addition of a flow diffusion parameter.
+The source-to-sink transfer of water from any model grid cell to a downstream (outlet) point is represented as a linear and time invariant response to an impulse of runoff.\marginpar{Very jargonny - try to reword this in a way that it makes sense for people who have not looked at unit hydrographs}
+Therefore, the development of the IRF between any combination of source and sink points can be described as a function of the travel time of water within the source grid cell and to the downstream point with the addition of a flow diffusion parameter. \marginpar{Confusing - separate the ``within grid cell'' from the ``between grid cell'' transport}
 The horizontal travel distance is computed using a flow direction raster \citep[e.g.][]{Wu_2011}.
 The Saint-Venant equation
 
  \begin{equation}
-     \frac{\partial Q}{\partial t} = D \frac{\partial^2 Q}{\partial x} + C \frac{\partial Q}{\partial x}
+   \label{eq:StVenant}
+   \frac{\partial Q}{\partial t} = D \frac{\partial^2 Q}{\partial x} + C \frac{\partial Q}{\partial x}
  \end{equation}
 
 represents the flow $Q$, at time $t$, at a downstream point $x$, as a function of the wave velocity, $C$, and the diffusivity, $D$; both of which may be estimated from geographical data.
 
-Eq. (1) can be solved with convolution integrals
+Eq.~(\ref{eq:StVenant})\marginpar{Use references - that is one of the strengths of \latex - I am not sure I did this quite right in this case cause it starts at Equation 2, but it should be very close} can be solved with convolution integrals
 
  \begin{equation}
-	Q(x,t) = \int_0^t U(t-s)h(x,s)ds
+   \label{eq:ConvIntegral}
+	  Q(x,t) = \int_0^t U(t-s)h(x,s)ds
  \end{equation}
 
 where
 
  \begin{equation}
+   \label{eq:GreensIRF}
 	h(x, t) = \frac{x}{2t\sqrt{\pi tD}}exp\left(-\frac{(Ct-x)^2}{4Dt}\right)
  \end{equation}
 
-is Green’s impulse response function, and $U$ is a unit hydrograph representing the distribution of flow from within each source grid cell to the edge of the source grid cell.
+is Green's impulse response function, and $U$ is a unit hydrograph representing the distribution of flow from within each source grid cell to the edge of the source grid cell.
 The Saint-Venant equations are solved to determine flow response from every source to outlet pair.
 
-\subsubsection{Upscaling and basin aggregation}
+\subsubsection{Upscaling and basin aggregation}\marginpar{As for the previous section this all makes perfect sense if you already know what is going on, but that is not the main audience. Be explicit about what is being preserved, etc.}
 \label{sec:remap}
 
-The development of the impulse response functions may be done on a high resolution (e.g. 1/16$^{\circ}$) flow network such as the one developed by \citet{Wu_2011}.
-Whereas the typical employment of the \citet{Lohmann_1996} model requires that the flow direction grid and the land surface model grid match exactly, the RVIC implementation first upscales and aggregates the high resolution IRF grid to the land surface model grid [Figure \ref{fig:2}].
+Whereas the typical employment of the \citet{Lohmann_1996} model requires that the flow direction grid and the land surface model grid match exactly, the RVIC implementation allows the development of the impulse response functions on a grid that is of higher resolution than that of the model by upscaling and aggregating the high resolution IRF grid to the land surface model grid [Figure \ref{fig:2}]\marginpar{It's fine as is, but in general you should not hardcode the fig numbers in latex, so you can move them around}.\marginpar{Again tell a bit more of a story: why is this desirable? What ``problem'' does this solve?}
 The upscaling process uses the first-order conservative remapping technique developed by \citep{Jones_1999}.
-Because the remapping scheme is conservative, the unit response to runoff (unit hydrograph) from each source grid cell is maintained.
+Because the remapping scheme is conservative, the unit response to runoff (unit hydrograph) from each source grid cell is maintained.\marginpar{What does that mean in plain english - what is being conserved?}
 Finally, the regridded IRFs are aggregated to include all basins flowing into a single outlet grid cell.
 
-\subsubsection{Convolution}
-\label{sec:convolution}
+\subsubsection{Convolution}\marginpar{A little more detail would again be helpful - refer to Lohmann's papers when you can}
+\label{sec:convolution}\marginpar{Refer to the convolution integral \ref{eq:ConvIntegral}}
 
-Once the development of the IRFs complete, RVIC performs a simple linear convolution of the IRFs and runoff fluxes from the land model.
+Once the development of the IRFs is complete, RVIC performs a simple linear convolution of the IRFs and runoff fluxes from the land model.
 In essence, RVIC aggregates the flow contribution from all upstream grid cells at every timestep, distributing them in time according the IRF.
 
 \subsection{Coupling}
 \label{sec:coupling}
 
 In nature, turbulent mixing and other diffusive processes combine to gradually spread freshwater along the coast and into the open ocean.
-In a coupled modeling environment however, these processes are difficult to represent at the spatial scales that runoff, ocean, and sea ice models are run at.
+In a coupled modeling environment however, these processes are difficult to represent at the spatial scales at which runoff, ocean, and sea ice models are run.
 To simulate the dispersion of freshwater throughout each ocean grid cell within RASM, a diffusion scheme is applied to avoid unrealistic salinity gradients that would occur when a river’s entire outflow is applied to one ocean grid cell.
-The mapping from the runoff grid to the ocean grid is produced as a preprocessing step using the runoff and ocean grids and masks.
+The mapping from the runoff grid to the ocean grid is produced \marginpar{Not sure what ``produced'' means in this context} as a preprocessing step using the runoff and ocean grids and masks.
 Each runoff gridcell is mapped to the nearest ocean grid cell.
-The flux is then smoothed over all grid cells in a 300 km radius with distance weighting e-folding scale of 1000 km such that the total quantity is conserved from runoff to ocean.
-This smoothing prevents excessively large and unrealistic runoff fluxes into any single ocean grid cell and encourages computational stability within the ocean model while representing the distributed changes in salinity due to the land-ocean freshwater flux.
+The flux is then smoothed over all grid cells in a 300 km radius with distance weighting e-folding scale of 1000 km \marginpar{What is a "distance weighting e-folding scale''?} such that the total quantity is conserved from runoff to ocean.
+This smoothing prevents excessively large and unrealistic runoff fluxes into any single ocean grid cell and encourages computational stability within the ocean model while representing the distributed changes in salinity due to the land-ocean freshwater flux.\marginpar{Work on the flow in this paragraph - you already said this}
 
 \subsubsection{RVIC in RASM}
 
 The IRFs used in RASM were developed using the \citet{Wu_2011} 1/16$^{\circ}$ flow direction rasters.
 The baseline RASM simulation used a spatially constant flow velocity and diffusion of 0.6 m/s and a 3,000 m$^2$/s, respectively.
 These parameters were chosen using the calibration methods described below in section~\ref{sec:parameters}.
-IRFs were developed for each of the 95,001 coastal 1/16$^{\circ}$ grid cells bordering the ocean model, and were aggregated and remapped to the 4,841 coastal grid cells on the 50-km near equal area land surface grid.
+IRFs were developed for each of the 95,001 coastal 1/16$^{\circ}$ grid cells bordering the ocean model and were aggregated and remapped to the 4,841 coastal grid cells on the 50-km near equal area land surface grid.
 
 \subsection{Parameter Selection}
 \label{sec:parameters}
@@ -367,15 +368,15 @@ For this procedure, RVIC was run offline of RASM at a daily timestep and was for
 The velocity parameter was varied between 0.2 and 1.5 m/s and the diffusion was varied between 500 and 4,000 m\textsuperscript{2}/s.
 Individual pairs of parameters were evaluated using a modified version of the overlap statistic \citet{Perkins_2012}.
 The overlap statistic, which was originally introduced as a measure of likeness for probability density functions, is applied here to the normalized mean monthly hydrographs of the six largest river basins in the RASM model domain [Figure \ref{fig:1}b] and the observations from \citet{Dai_2009}.
-The overlap statistic is perhaps the best performance measure of the routing model because it focuses entirely on the shape of the hydrograph and does not take into account bias in the flow volume which is determined by the land surface model [Figure \ref{fig:3}].
+The overlap statistic is perhaps the best performance measure of the routing model because it focuses entirely on the shape of the hydrograph and does not take into account bias in the flow volume which is determined by the land surface model [Figure \ref{fig:3}].\marginpar{The figure is not very informative - I would leave it out or move it to supplemental materials. We can describe the figure in words}
 The pair of velocity and diffusions parameters, 0.6 m/s and 3,000 m\textsuperscript{2}/s respectively, was chosen to maximize the volume weighted composite overlap statistic for the largest six rivers in the RASM domain [Figure \ref{fig:4}].
 
 \section{Model Simulations and Data}
 
 In this paper, we present results from two RASM simulations, $RASM_{CONTROL}$, and $RASM_{NOROF}$ using RASM version 1.0 (Tag R1010), each using ERA-Interim boundary conditions.
-We also highlight the impact of the calibration procedure with a offline RVIC simulation, $RVIC_{FAST}$, forced with runoff fluxes from $RASM_{CONTROL}$.
-All three simulations were run from September 1, 1979 through December 31, 2009, however we use an analysis period of January 1, 1990 and December 31, 2009, allowing for a 10 year model spin-up.
-Both RASM simulations began with the same initial states (see \citet{Hamman_2016} for more details) and use the same land, atmosphere, ocean, and sea ice model configurations.
+We also highlight the impact of the calibration procedure with an offline RVIC simulation, $RVIC_{FAST}$, forced with runoff fluxes from $RASM_{CONTROL}$.
+All three simulations were run from September 1, 1979 through December 31, 2009. However, we use an analysis period of January 1, 1990 and December 31, 2009, allowing for a 10 year model spin-up.\marginpar{Make sure that this is RASM spinup the routing model requires only very little spinup}
+Both RASM simulations began with the same initial state (see \citet{Hamman_2016} for more details) and use the same land, atmosphere, ocean, and sea ice model configurations.
 These simulations only differ in the following ways:
 \begin{itemize}
      \item $RASM_{CONTROL}$: uses the calibrated RVIC parameters described above.
@@ -397,15 +398,15 @@ Figure \ref{fig:5} compares the monthly routed hydrographs for $RASM_{CONTROL}$ 
 The annual bias, annual overlap, and monthly RMSE statistics for these six monthly hydrographs are shown in Table\ref{table:1}.
 The $RASM_{CONTROL}$ hydrographs in the Amur, Lena, and Yukon basins match the observations best, with overlap statistics between X-X.
 In the Ob, Yenisey, and Mackenzie River basins, the $RASM_{CONTROL}$ routed streamflow suffers from positive biases in the winter and spring and negative biases in the summer.
-Consequently, the overlap statistics for these rivers are lower (X-X).
-In these basins, during the winter, it is clear that VIC is under estimating the baseflow flux.
+Consequently, the overlap statistic for these rivers has lower values (X-X).
+In these basins, during the winter, it is clear that VIC is underestimating the baseflow flux.
 For most of the basins shown in Figure \ref{fig:5}, the timing of the peak month in the $RASM_{CONTROL}$ simulation occurs in the same month as the observations.
-The notable exception to this is in the Ob River basin, where the runoff regime is acutely influenced by extensive wetlands and permafrost, and the spring peak occurs a month early (May vs. June).
-Compared to the normalized hydrographs in Figure \ref{fig:4}, the majority of the disagreement in Figure \ref{fig:5} is due to the bias in the total annual runoff flux, which is entirely controlled by the land surface model.
+The notable exception to this is in the Ob River basin, where the runoff regime is acutely influenced by extensive wetlands and permafrost, and the spring peak occurs a month early in our model simulations (May vs. June).
+Compared to the normalized hydrographs in Figure \ref{fig:4}, the majority of the disagreement in Figure \ref{fig:5} is due to the bias in the total annual runoff flux, which is entirely controlled by the land surface model.\marginpar{not really - the rest of RASM comes into this as well. Just say that it is not under the control of RVIC which is a mass-conserving routing model}
 \citet{Hamman_2016} provide a more detailed, intermodel comparison of the runoff biases in the Arctic.
 
 The peak spring freshet in $RVIC_{FAST}$ occurs about one month earlier than in $RASM_{CONTROL}$.
-On average, this leads to overlap statistics that are about 15 percent lower than the $RASM_{CONTROL}$ simulation.
+On average, this leads to values for the overlap statistic \marginpar{it's one statistic (not ``statistics'' that can have different values} that are about 15\% lower than for the $RASM_{CONTROL}$ simulation.
 The differences in the routing parameters used in the $RASM_{CONTROL}$ and $RVIC_{FAST}$ simulations can be clearly identified in the annual cycle column of Figure \ref{fig:5}.
 The bias in timing of the peak spring freshet is mostly due to the difference in streamflow velocity (2.0 vs. 0.6 m/s), whereas the shape of the hydrograph is largely determined by the diffusivity parameter (2000 vs. 6000 m\textsuperscript{2}/s).
 
@@ -415,16 +416,16 @@ The contours denote lines of equal root-mean-square error (RMSE) where zero is a
 While the correlation coefficients in $RVIC_{FAST}$ are not distributed according to the flow magnitude, the largest basins in $RASM_{CONTROL}$ tend to perform better with correlation coefficients typically increasing by about 0.3.
 This is likely due to our choice to calibrate the runoff parameters using only the largest basins in the domain.
 While the correlations are shown to improve in all of the basins shown in Figure \ref{fig:6}, the standard deviations are not shown to be significantly impacted by the calibration.
-This indicates that the variability in the monthly timeseries in not significantly controlled by the routing model and are more a function of the runoff flux coming from the land surface model.
+This indicates that the variability in the monthly timeseries is not significantly controlled by the routing model and are more a function of the runoff flux coming from the land surface model.
 
 \subsection{Role of high resolution coastal streamflow on ocean and sea ice dynamics}
-Runoff is a major source of freshwater to the Arctic Ocean (AO). It maintains the vertical stratification and may influence the ocean circulation.
-The freshwater content is vital property of AO.
+Runoff is a major source of freshwater to the Arctic Ocean\marginpar{I think in much of the literature this is used for ``Arctic Oscillation'' - a climate fluctuation like ENSO - I would just write out Arctic Ocean}. It maintains the vertical stratification and may influence the ocean circulation.
+The freshwater content is vital property of the Arctic Ocean.
 Comparing computational results (fig X and XX) there is a clear example how large the change is in Beaufort Gyre (BG).
 The change of runoff influence basin-scale hydrology.
 The BG, wind-driven ocean current accumulates freshwater in the Canada Basin.
 
-We begin by exploring the influence of coastal streamflow on the mean surface salinity and temperature across the RASM ocean domain.
+We begin by exploring\marginpar{too chatty} the influence of coastal streamflow on the mean surface salinity and temperature across the RASM ocean domain.
 We compare the fully coupled simulations ($RASM_{CONTROL}$) and the partially coupled simulation ($RASM_{NOROF}$) to the PHC climatological dataset.
 In the control simulation, which has the most realistic streamflow timing, differences in the surface salinity are small...
 
