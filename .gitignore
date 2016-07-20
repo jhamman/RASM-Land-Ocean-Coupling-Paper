@@ -126,3 +126,6 @@ sympy-plots-for-*.tex/
 *.sav
 
 .refresh
+
+# Ipython
+.ipynb_checkpoints
