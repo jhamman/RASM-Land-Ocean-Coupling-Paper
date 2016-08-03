@@ -67,6 +67,8 @@
 %  \end{equation}
 %  \end{linenomath*}
 \usepackage{amsmath}
+
+\usepackage{enumitem}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Figures and Tables
 %
@@ -224,9 +226,9 @@ The terrestrial freshwater flux has been shown to be an important driver of ice-
 \citet{Newton_2008} applied observed climatological runoff from nine of the largest rivers within the Arctic basin in the Naval Postgraduate School (NPS) Arctic regional Model (NAME).
 Their study used passive Lagrangian flow tracers within their model to track the spatial distribution of runoff.
 They found the highest concentrations of river runoff along the Siberian coast.
-Despite our understanding of the importance of river runoff in Arctic Ocean dynamics, \citet{Nummelin_2015} show that global climate models [GCMs] poorly represent the vertical structure of the Arctic Ocean, with many models failing to accurately reproduce the observed profiles of temperature and salinity in the upper 500 m.
+Despite our understanding of the importance of river runoff in Arctic Ocean dynamics, \citet{Nummelin_2015} show that global climate models (GCMs) poorly represent the vertical structure of the Arctic Ocean, with many models failing to accurately reproduce the observed profiles of temperature and salinity in the upper 500 m.
 They conclude that a correct representation of the streamflow flux is a key step toward improving the performance of the ocean model components in these models.
-\textit{All - if there are other relevent studies that have explored the role of streamflow on regional or global ocean dynamics, please let us know}
+\textit{All - if there are other relevant studies that have explored the role of streamflow on regional or global ocean dynamics, please let us know}
 
 Numerous observational and modeling studies have explored the seasonal and inter-annual behavior of Arctic runoff. % BN: We should include a brief mention and description of the CORE2 data set, since it appears to be widely used withing the arctic science community
 \citet{Lammers_2001} compiled the R-ArcticNET database, a regional hydrographic record of mean monthly streamflow observations that includes over 3,700 streamflow gauges in the Pan-Arctic region.
@@ -234,17 +236,18 @@ The collection of observations in R-ArcticNET was later used by \citet{Shikloman
 \citet{Dai_2009} extended portions of the R-ArcticNET database through 2007 for a subset of coastal streamflow gauges.
 \citet{Adam_2007}, \citet{Adam_2008}, \citet{Su_2005}, and \citet{Dai_2009} all have used uncoupled land surface models (LSMs), in conjunction with routing schemes to simulate streamflow across the pan-Arctic region.
 These studies have led to an improved understanding of the terrestrial hydroclimate in the Arctic and how the seasonal streamflow dynamics in the Arctic basin respond to changes in climate and water management activities.
-However, there has not been significant research applied to understanding the role of streamflow as a coupled process in the greater Arctic climate system. % BN: Is this true? This is a potential reviewer trigger ("the authors are clearly unfamiliar with MY important work"). If we don't really need it, then I would actually delete the sentence, especially since it should become clear from the next paragraphs.
+However, there has not been significant research applied to understanding the role of streamflow as a coupled process in the greater Arctic climate system, specifically within Earth system models (ESMs). % BN: Is this true? This is a potential reviewer trigger ("the authors are clearly unfamiliar with MY important work"). If we don't really need it, then I would actually delete the sentence, especially since it should become clear from the next paragraphs.
 
 % [other climate models that include coupled land-ocean dynamics]
 Cell-to-cell routing methods, such as the River Transport Model (RTM) \citep{Branstetter_2003} have been applied globally in a number of GCMs, including in the Community Earth System Model (CESM).
 These cell-to-cell models are typically difficult to parameterize across a range of spatial scales \citep{Sushama_2004}.
 Source-to-sink routing models \citep[e.g.][]{Lohmann_1996,Naden_1992}, akin to the RVIC model used in this study, have also been previously applied in coupled models \citep[e.g.][]{Olivera_2000}.
 Source-to-sink routing methods do not explicitly track streamflow between grid cells; rather, they parameterize the distribution and travel time of runoff between source and outlet grid cells.
-In previous applications of source-to-sink routing models within coupled climate models \citep[e.g.][]{Olivera_2000}, the streamflow routing has been applied at coarse spatial resolutions (greater than 200 km) and low frequency coupling (e.g. daily).
-Furthermore, these studies have typically focused on global applications and have not specifically evaluated the importance of streamflow in terms of coupled land-ocean interactions.
-In recent years, there have been fewer studies of developing or evaluating streamflow routing schemes coupled within earth system models. % BN: But there has been significant work in the development of regional- and global-scale routing models of increasing complexity. For example, MOSART, the model from Yamazaki (e.g. doi:10.5194/hess-13-2241-2009, doi:10.1002/2014GL059744), and mizuRoute (doi:10.5194/gmd-9-2223-2016). We need to reference that literature.
-\citet{Bring_2015}, in their recent synthesis of CMIP5 runoff dynamics, conclude that a significant community effort should be made to improve the understanding and modeling of basin scale freshwater fluxes in coupled climate modeling.
+In previous applications of source-to-sink routing models within coupled GCMs \citep[e.g.][]{Olivera_2000}, the streamflow routing has been applied at coarse spatial resolutions (greater than 200 km) and low frequency coupling (e.g. daily).
+More recent approaches to streamflow routing continue to be developed and adding additional process representation.
+Examples from the recent literature include MOSART \citep{Li_2013}, CaMa-Flood \citep{Yamazaki_2009,Yamazaki_2014}, and mizuRoute \citep{Clark_2016}.
+While some of these routing approaches have been coupled to GCMs \citep[e.g.]{Sushama_2004, Olivera_2000,Li_2013}, they have not specifically evaluated the importance of streamflow in terms of coupled land-ocean interactions.
+In their recent synthesis of CMIP5 runoff dynamics, \citet{Bring_2015} conclude that a significant community effort should be made to improve the understanding and modeling of basin scale freshwater fluxes in coupled climate modeling.
 This argument is further echoed by \citet{Lique_2015} in their recent review paper on the representation of the Arctic hydrologic cycle in coupled climate models.
 
 In this paper, we describe the land to ocean coupling in the Regional Arctic System Model.
@@ -260,14 +263,14 @@ Finally, in Section \ref{sec:conclusions}, we provide our conclusions and highli
 
 \subsection{RASM}
 \label{sec:rasm}
-The Regional Arctic System Model is a fully coupled, high spatial and temporal resolution regional earth system model applied over the pan-Arctic domain.
+The Regional Arctic System Model is a fully coupled, high spatial and temporal resolution regional ESM applied over the pan-Arctic domain.
 Principal goals of the modeling project are to better understand the interaction between physical systems in the Arctic drainage basin, to advance understanding of past and present states of Arctic climate, and to improve seasonal to multi-decadal prediction capabilities of key Arctic indicators.
 Model components are coupled using the CESM coupled model framework and the CPL7 flux coupler \citep{Craig_2011}.
 Below, we provide a brief description of the five component models in RASM version 1.0 (Figure \ref{fig:rasm_schematic_domain}a).
 For the purposes of this paper, we are principally concerned with the coastal streamflow flux and its role in the Arctic Ocean system and our description below  focuses on the streamflow and ocean model components.
 The reader will find additional information on the implementation of individual component models in the RASM-specific references cited below.
 
-\begin{enumerate}
+\begin{itemize}[leftmargin=+.5in]
 \item CICE: The Los Alamos Sea Ice model is a physically-based, dynamic sea ice model \citep{Hunke_2010}.
 \citet{Roberts_2015a} provide a description of the application of CICE, version 5, within RASM.
 \item POP: The Parallel Ocean Program model is a general circulation ocean model \citep{Smith_2010}.
@@ -301,14 +304,14 @@ The RVIC streamflow routing model is a modified version of the routing model typ
 The original \citet{Lohmann_1996} model has been used in many offline modeling studies from regional to global spatial scales at horizontal resolutions from 1/16$^{\circ}$ to 2$^{\circ}$ \citep[e.g.][]{Nijssen_1997,Lohmann_1998b,Su_2005,Hamlet_2013}.
 RVIC is a source-to-sink routing model that solves a linearized version of the Saint-Venant equations \citep{Fread_1992,Mesa_1986}.
 The linearized Saint-Venant equations (\ref{eq:St_Venant}) are a one-dimensional model describing unsteady flow in terms of two time-invariant parameters, flow velocity and diffusivity.
-The velocity and diffusivity parameters can be estimated from observed streamflow, through numeric optimization, or by solving the Saint-Venant equations directly. % BN: But if you already solve the S-V equations directly, why would you need RVIC?
+The velocity and diffusivity parameters can be estimated from observed streamflow or through numeric optimization.
 RVIC uses flow direction raster (FDR) grids, typically derived from topographic information \citep[e.g.][]{Wu_2011}, to specify the flow path and distance for each source-sink pair.
 The flow along the travel path is parameterized as a linear time-invariant unit impulse response function (IRF) to runoff generated at individual grid cells by the LSM, often referred to as a unit hydrograph (UH).
-The application of the RVIC model has two distinct steps, a preprocessing step in which IRFs are developed for each source-toink pair (see Sections ~\ref{sec:irfs} and ~\ref{sec:remap}), and a computationally efficient convolution step in which distributed runoff from the LSM is routed to downstream points (see Section~\ref{sec:convolution}).
+The application of the RVIC model has two distinct steps, a preprocessing step in which IRFs are developed for each source-to-sink pair (see Sections ~\ref{sec:irfs} and ~\ref{sec:remap}), and a computationally efficient convolution step in which distributed runoff from the LSM is routed to downstream points (see Section~\ref{sec:convolution}).
 
 The RVIC model differs from the original \citet{Lohmann_1996} model in four main ways:
 
-\begin{enumerate}
+\begin{itemize}[leftmargin=+.5in]
 \item RVIC completely separates the development of the IRFs from the flow convolution step,
 \item RVIC allows the development of the IRFs to be done on flow direction grids that do not match the grid elements used for the land model (see Section~\ref{sec:irfs}),
 \item The RVIC convolution scheme operates in a space-before-time pattern, facilitating direct coupling with LSMs (see Section~\ref{sec:convolution}),
@@ -353,8 +356,8 @@ Equations \ref{eq:conv_integral} and \ref{eq:Greens_IRF} are solved to determine
 The original employment of the \citet{Lohmann_1996} model required that the flow direction grid and the LSM grid match exactly.
 This limited the applicability of the model and required either the LSM to be evaluated on the same grid as an existing flow direction dataset grid or the custom generation of a flow direction grid for each LSM grid.
 The RVIC implementation allows the development of the IRFs on a different grid, usually higher spatial resolution, than the LSM by upscaling and aggregating the high resolution IRF grid to the LSM grid (Figure \ref{fig:uh_remap_schematic}).
-The upscaling process uses the first-order conservative remapping technique developed by \citet{Jones_1999}. % BN: You are never specific on what you are remapping. This section needs a little more detail to be understandable by people not directly familiar with what we are trying to do
-Because the remapping scheme is conservative, each of the resulting IRFs on the LSM grid are an area weighted average of the IRFs on the high resolution FDR  grid.
+The upscaling process spatially remaps the IRFs from the high-resolution FDR grid to the LSM grid using the first-order conservative remapping technique developed by \citet{Jones_1999}.
+Because the remapping scheme is conservative, each of the resulting IRFs on the LSM grid are an area weighted average of the IRFs on the high resolution FDR grid.
 Finally, in the event there are multiple sink points on the FDR grid within a single LSM grid cell, the upscaled IRFs are combined to include all source points flowing into a single outlet grid cell.
 
 \subsubsection{Convolution}
@@ -376,15 +379,17 @@ The key difference is in the implementation, where the time integral has been mo
 
 The IRFs used in RASM were developed using the 1/16$^{\circ}$ FDRs from \citet{Wu_2011}.
 RVIC in RASM uses a spatially constant flow velocity and diffusivity of 0.6 m/s and a 3,000 m$^2$/s, respectively.
-These parameters were chosen using the calibration methods described in Section~\ref{sec:parameters} and fit within the valid ranges for these parameters discussed in the literature \citep[e.g.][]{Decharme_2010,Lohmann_1996}.
+These parameters were chosen using the calibration methods described in Section~\ref{sec:parameters}.
 Hourly IRFs were developed for each of the 95,001 coastal 1/16$^{\circ}$ grid cells bordering the ocean model and were upscaled and aggregated to the 4,841 coastal grid cells on the 50-km near equal area land surface grid that is used by RASM version 1.0.
 
-Turbulent mixing and other diffusive processes combine to gradually spread fresh water along the coast and into the open ocean. % BN: Is the same method used in CESM or other models? If so, is there a reference we can include?  --- JJH: Good question, I asked Tony this when he sent me this description and he said there was not, to his knowledge, a reference to cite.
+Turbulent mixing and other diffusive processes combine to gradually spread fresh water along the coast and into the open ocean.
+% BN: Is the same method used in CESM or other models? If so, is there a reference we can include?  --- JJH: Good question, I asked Tony this when he sent me this description and he said there was not, to his knowledge, a reference to cite.
 In a coupled modeling environment however, these processes are difficult to represent at the spatial scales at which the runoff, ocean, and sea ice models are configured.
 To simulate the dispersion of fresh water throughout each ocean grid cell within RASM, a diffusion scheme is applied within the coupler (CPL7) to avoid unrealistic salinity gradients that could occur where a river's entire outflow is applied to a single ocean grid cell.
 The mapping from the runoff grid to the ocean grid is generated as a preprocessing step using the runoff and ocean grids.
 Each runoff gridcell is mapped to the nearest ocean grid cell.
-The flux is then smoothed over all grid cells in a 300 km radius ($r_{max}$) with a distance ($r$) weighted logarithmically decreasing e-folding scale of 1000 km ($r_{fold}$) such that the total quantity is conserved from runoff to ocean. % BN: We need to standardize on "name (symbol)" or "name symbol". Since the typography is different for name and symbol, I am fine with either, as long as we are consistent
+The flux is then smoothed over all grid cells in a 300 km radius ($r_{max}$) with a distance ($r$) weighted logarithmically decreasing e-folding scale of 1000 km ($r_{fold}$) such that the total quantity is conserved from runoff to ocean.
+% BN: We need to standardize on "name (symbol)" or "name symbol". Since the typography is different for name and symbol, I am fine with either, as long as we are consistent
 The mapping weights $w(r)$ are given by
 
 \begin{equation}
@@ -399,10 +404,12 @@ The mapping weights $w(r)$ are given by
 \subsection{Parameter Selection}
 \label{sec:parameters}
 
-We used a brute force parameter evaluation procedure to select the velocity and diffusivity parameters for the RVIC model applied in RASM.
+The commonly used ``default'' velocity and diffusivity parameters for the \citet{Lohmann_1996} and RVIC models are 2.0 m/s and 2,000 m\textsuperscript{2}/s, respectively.
+Early RASM simulations, however, indicated that there was a large timing bias in the RVIC model, indicating that the default parameter values were not adequately describing the routing behavior in the Arctic.
+To correct this timing bias, we applied a brute force parameter evaluation procedure to select the velocity and diffusivity parameters for the RVIC model applied in RASM.
 For this procedure, RVIC was run offline (i.e. not coupled to RASM) at a daily timestep and was forced using daily runoff fluxes from the fully coupled RASM simulation described as $RASM_{ERA}$ in \citet{Hamman_2016}.
-These runoff fluxes include both the fast-reponse and slow-response runoff components generated by the LSM.
-The velocity parameter was varied between 0.2 and 1.5 m/s and the diffusivity was varied between 500 and 4,000 m\textsuperscript{2}/s. % BN: Is there a reason for these parameter bounds?
+These runoff fluxes include both the fast-response and slow-response runoff components generated by the LSM.
+The velocity and diffusivity parameters were varied between 0.2-1.5 m/s and 500-4,000 m\textsuperscript{2}/s respectively; ranges consistent with the the plausible values discussed in the relevant literature \citep[e.g.][]{Decharme_2010,Lohmann_1996};
 Individual pairs of parameters were evaluated using a modified version of the overlap statistic \citep{Perkins_2007} as the objective function.
 The overlap statistic, which was originally introduced as a measure of likeness for probability density functions, is applied here to the normalized mean monthly hydrographs of the six largest river basins in the RASM model domain (Figure \ref{fig:rasm_schematic_domain}b).
 The overlap statistic is perhaps the best performance measure of the routing model because it focuses entirely on the shape of the hydrograph and does not take the bias in the flow volume into account (Figure \ref{fig:calibration_hydrographs}). This is desirable since the volume bias is determined by the LSM (and the other components in a coupled model environment) and not affected by the routing model which is mass-conserving.
@@ -417,17 +424,16 @@ All three simulations were run from September 1, 1979 through December 31, 2009.
 For the RASM simulations, we focus our analysis on the period January 1, 1990 through December 31, 2009, allowing for a 10 year model spin-up of the coupled system.
 Both RASM simulations began with the same initial state \citep[see][]{Hamman_2016} and use identical land, atmosphere, ocean, and sea ice model configurations.
 These simulations only differ as follows:
-\begin{itemize}
-     \item $RASM_{CONTROL}$: uses the calibrated RVIC parameters described above.
-     \item $RASM_{NOROF}$: does not include the runoff flux from the land to the ocean.
-     \item $RVIC_{FAST}$: stand-alone RVIC simulation forced with $RASM_{CONTROL}$.
-          This simulation uses velocity and diffusivity parameters of 2.0 m/s and 2,000 m\textsuperscript{2}/s, respectively.
-          These parameter values are frequently used as the default values with the RVIC model and were the original values used when developing RVIC within the coupled model. % BN: Figure out how to indent a multi-line item properly. There must be an easy way to do this, but a 2-minute search did not give me what I needed
-          % BN: I would move the motivation for these "default" values to the previous section
+\begin{itemize}[leftmargin=+.5in]
+  \item $RASM_{CONTROL}$: uses the calibrated RVIC parameters described above.
+  \item $RASM_{NOROF}$: does not include the runoff flux from the land to the ocean.
+  \item $RVIC_{FAST}$: stand-alone RVIC simulation forced with $RASM_{CONTROL}$. This simulation uses RVIC's default velocity and diffusivity parameters of 2.0 m/s and 2,000 m\textsuperscript{2}/s, respectively.
 \end{itemize}
 
-We compare output from RASM simulations to streamflow observations in the \citet{Dai_2009} dataset, hereafter referred to as D2009. % BN: I'd prefer to the values as D2009 rather than observations, to make it clear that this dataset also involves some manipulation of the (limited) observations that exist.
-This dataset provides mean monthly streamflow observations at the most downstream gauging location for more than 60 individual river basins within the RASM domain and analysis period. % BN: Provide a little more info (1-2 lines) on the background of the Dai dataset, since that is what we are comparing against. How much of that is observations versus models? Why not use R-ArcticNet directly? Why not use Core2? -- but keep it short.
+We compare output from RASM simulations to streamflow observations in the \citet{Dai_2009} dataset, hereafter referred to as D2009.
+This dataset provides mean monthly streamflow observations at the most downstream gauging location for more than 60 individual river basins within the RASM domain and analysis period.
+Gaps in the observed data record were filled using a combination of linear regression and results from the Community Land Model forced with observed meteorology.
+Compared to R-ArcticNET, D2009 provides a longer, more complete data record of streamflow observations.
 
 \section{Results}
 \label{sec:results}
@@ -444,7 +450,7 @@ The $RASM_{CONTROL}$ hydrographs in the Amur, Lena, and Yukon basins match D2009
 In the Ob, Yenisey, and Mackenzie River basins, the $RASM_{CONTROL}$ streamflow shows positive biases in the winter and spring and negative biases in the summer.
 Consequently, the overlap statistic for these rivers is lower ($<$ 0.75).
 In these basins, during the winter, it is clear that VIC is underestimating the baseflow flux.
-For most of the basins shown in Figure \ref{fig:hydrographs}, the timing of the peak month in the $RASM_{CONTROL}$ simulation occurs one month before the observations.
+For most of the basins shown in Figure \ref{fig:hydrographs}, the timing of the peak month in the $RASM_{CONTROL}$ simulation occurs one month before D2009.
 This peak streamflow timing bias is likely due to a spring and summer warm bias in the $RASM_{CONTROL}$ simulation \citep{Hamman_2016,Cassano_2016}, resulting in premature snow melt and runoff.
 The notable exception to this is in the Ob River basin, where the runoff regime is acutely influenced by extensive wetlands and permafrost, and the spring peak occurs a month early in $RASM_{CONTROL}$ (May vs. June).
 Compared to the normalized hydrographs in Figure \ref{fig:calibration_hydrographs}, the majority of the disagreement in Figure \ref{fig:hydrographs} is due to the bias in the total annual runoff flux which is not contolled by the mass conserving RVIC routing model.
@@ -469,7 +475,7 @@ This indicates that the variability in the monthly timeseries is not significant
 Figure \ref{fig:ocean_timeseries} shows the timeseries of streamflow for the Central Arctic and greater POP domain.
 In the Central Arctic basin, melt season streamflows can be greater than 500 km$^3$/month and nearly zero during the winter.
 As discussed in Section \ref{sec:hydrographs}, the winter streamflow minimum is likely underestimated in RASM due to cold season biases in the baseflow flux generated from VIC.
-On an annual basis, the streamflow shown in Figure \ref{fig:ocean_timeseries} comprises approximately XX percent (ROBERT: PLEASE CALCULATE) of the total freshwater flux into the central arctic basin; 90 percent of which is delivered between May and September. % BN: Can Andrew do this?
+On an annual basis, the streamflow shown in Figure \ref{fig:ocean_timeseries} comprises approximately XX percent (ROBERT: PLEASE CALCULATE IF POSSIBLE) of the total freshwater flux into the central arctic basin; 90 percent of which is delivered between May and September. % BN: Can Andrew do this?
 
 % salinity
 Figure~\ref{fig:ocean_timeseries} also shows the timeseries of SSS and sea surface temperature (SST) for the $RASM_{CONTROL}$ and $RASM_{NOROF}$ simulations.
@@ -477,7 +483,7 @@ The SSS in $RASM_{NOROF}$ is in a transient state until about the year 2000, whi
 By 2010, the SSS differs in the two simulations by about 0.6 ppt (parts per thousand) for the full ocean domain and by 1.5 ppt for the central arctic basin.
 The differences in the SSTs between the two simulations are relatively small when averaged over the full ocean domain, $RASM_{CONTROL}$ simulation is found to be about 0.25 $^{\circ}$C warmer than the $RASM_{NOROF}$ simulation in the central arctic basin.
 
-% BN: The results here are a little less ambitioous than what I had hoped for. Probably mostly because of the delay on Robert's end, but I had hoped that we'd be able to show some differences in depth of the mixed layer, etc. Is there a way we can tease a little more info out of all these runs. There is a huuuge amount of computer time and effort involved here and it does not clearly show that. The Serreze schematic was nice in that regard because it pulled all the pieces together, but I understand why that will not be part of this paper.
+% BN: The results here are a little less ambitious than what I had hoped for. I had hoped that we'd be able to show some differences in depth of the mixed layer, etc. Is there a way we can tease a little more info out of all these runs. There is a huuuge amount of computer time and effort involved here and it does not clearly show that. The Serreze schematic was nice in that regard because it pulled all the pieces together, but I understand why that will not be part of this paper.
 
 \section{Discussion}
 \label{sec:discussion}
@@ -516,7 +522,7 @@ The RVIC streamflow routing model is a sink-to-source river routing scheme that 
 This paper has introduced the RVIC model, demonstrated its ability to simulate the first-order routing processes in the Arctic, and shown the relative importance of including the runoff flux in coupled ocean modeling applications.
 In doing so, we conclude the following:
 
-\begin{itemize}
+\begin{itemize}[leftmargin=+.5in]
 \item Linear routing models, such as RVIC, can be applied within coupled model frameworks to provide high temporal and spatial frequency runoff to ocean models.
 RVIC is computationally inexpensive and is relatively easy to parameterize, two features that add to its applicability in a wide range of coupled climate modeling applications.
 \item Using the remapping and upscaling approach of unit hydrographs described in Section ~\ref{sec:remap}, we introduced a new method for developing unit hydrographs using dissimilar flow direction and routing grids.
@@ -637,7 +643,6 @@ The unit hydrographs for the gridcell indicated by the red circle in the center 
 \begin{figure}
 \noindent\includegraphics[width=40pc,natwidth=1]{ocean_combine}
 \caption{Seasonal difference ($RASM_{NOROF}$ - $RASM_{CONTROL}$) in mean sea surface salinity (top), sea surface temperature (middle), and sea ice height (bottom) (2000-2009). Stippling denotes differences that are statistically significant at the 95 percent confidence interval.}
-% BN: See comment in Figure 4 about labels
 \label{fig:ocean_maps}
 \end{figure}
 
@@ -650,18 +655,17 @@ The unit hydrographs for the gridcell indicated by the red circle in the center 
   \label{table:rivers}
   \resizebox{\textwidth}{!}{%
   \begin{tabular}{|l|c|c|c|c|c|c|}
-  {} & \multicolumn{2}{c}{Bias (\%)} & \multicolumn{2}{c}{Overlap (-)}  &  \multicolumn{2}{c}{RMSE ($m^3/s$)} \\
-  River & $RASM_{CONTROL}$ & $RVIC_{FAST}$ & $RASM_{CONTROL}$ & $RVIC_{FAST}$ & $RASM_{CONTROL}$ & $RVIC_{FAST}$ \\
-  Ob at Salekhard         &            -3.85 &         -3.58 &             0.73 &          0.65 &         12087.04 &      14866.25 \\
-  Yenisey at Igarka       &           -25.75 &        -25.81 &             0.75 &          0.64 &         13788.23 &      20114.30 \\
-  Amur at Komsomolsk      &            26.85 &         26.66 &             0.90 &          0.93 &          6827.36 &       6711.21 \\
-  Lena at Kusur           &           -28.02 &        -28.22 &             0.80 &          0.64 &         13711.20 &      20732.74 \\
-  Yukon at Pilot          &            13.21 &         13.35 &             0.79 &          0.66 &          5088.45 &       7359.83 \\
-  Mackenzie at Arctic Red &            -4.00 &         -3.79 &             0.75 &          0.67 &          6221.61 &       8215.21 \\
-  Nelson at Bladder       &            61.25 &         61.36 &             0.71 &          0.70 &          2878.11 &       2918.71 \\
+  {} & \multicolumn{1}{c}{Bias (\%)} & \multicolumn{2}{c}{Overlap (-)}  &  \multicolumn{2}{c}{RMSE (100 $m^3/s$)} \\
+  River                   & $RASM_{CONTROL}$ & $RVIC_{FAST}$ & $RASM_{CONTROL}$ & $RVIC_{FAST}$ & $RASM_{CONTROL}$ \\
+  Ob at Salekhard         &            -3.9  &          0.65 &             0.73 &      148.7    &         120.9    \\
+  Yenisey at Igarka       &           -25.8  &          0.64 &             0.75 &      201.1    &         137.9    \\
+  Amur at Komsomolsk      &            26.9  &          0.93 &             0.90 &       67.1    &          68.3    \\
+  Lena at Kusur           &           -28.0  &          0.64 &             0.80 &      207.3    &         137.1    \\
+  Yukon at Pilot          &            13.2  &          0.66 &             0.79 &       73.6    &          50.9    \\
+  Mackenzie at Arctic Red &            -4.0  &          0.67 &             0.75 &       82.2    &          62.2    \\
+  Nelson at Bladder       &            61.3  &          0.70 &             0.71 &       29.2    &          28.8    \\
   \end{tabular}
 }
-% BN: See comment about bias in text. Also reduce number of significant digits. Reporting RMSE in 100's of liters is incredibly precise, but not at all accurate. I would probably change the units to 100 m3^s and then only provide one number after the decimal. so 2878.11 becomes 28.8 (or thousands and then provide two numbers)
 \end{table}
 
 \begin{table}
