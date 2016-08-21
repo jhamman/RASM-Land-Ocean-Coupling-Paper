@@ -206,46 +206,45 @@ We compare two RASM simulations, one with coastal runoff and the other without, 
 A key result of this work is the production of a new spatially-consistent, high-resolution dataset of coastal freshwater fluxes for the Arctic basin and surrounding areas.
 
 % [Overview of the Arctic freshwater budget/cycle and the role of streamflow.]
-Approximately 11\% of the global terrestrial runoff drains into the Arctic Ocean, which holds only 1.4\% of the Earth's salt water \citep{Lewis_2000,Lammers_2001}.
+Approximately 11\% of global terrestrial runoff drains into the Arctic Ocean, which holds only 1.4\% of the Earth's salt water \citep{Lewis_2000,Lammers_2001}.
 As a result, the Arctic Ocean has the lowest salinity levels among the Earth's oceans \citep{Steele_2001}.
 Streamflow is the largest contributor of freshwater to the Arctic Ocean and comprises approximately 38\% of the total freshwater flux entering the Arctic Ocean; the remainder of which consists of direct precipitation (24\%) over the Arctic Ocean, inflow from the Pacific Ocean (30\%), and inflow from the Atlantic Ocean (8\%).
 The streamflow flux to the Arctic Ocean also has a distinct seasonal cycle.
 Across the Arctic region, the annual runoff hydrograph is characterized by a prominent spring freshet, with about two-thirds of the annual runoff volume occurring between April and July \citep{Lammers_2001}.
-Therefore, during the spring and summer months, the fractional contribution of freshwater to the Arctic Ocean from streamflow may be as high as 60\% (uncertainty in this figure is largely driven by the uncertainty in the seasonal cycle of the Bering Straight inflow) \citep{Serreze_2006}.
+In fact, during the spring and summer months, the fractional contribution of freshwater to the Arctic Ocean from streamflow may be as high as 60\% (uncertainty in this figure is largely driven by the uncertainty in the seasonal cycle of the Bering Straight inflow) \citep{Serreze_2006}.
 
 % [The role of streamflow in ocean/ice dynamics]
-Streamflow plays an important role in coastal ocean dynamics and hydrography, as well as in sea ice formation and melt \citep{Weatherly_1996,Rabe_2011,Fichot_2013}.
+Coastal streamflow plays an important role in coastal ocean dynamics and hydrography, as well as in sea ice formation and melt \citep{Weatherly_1996,Rabe_2011,Fichot_2013}.
 Runoff from Arctic river basins is the primary source of buoyancy-driven currents such as the Alaska, Siberian, Norwegian, and East Greenland coastal currents \citep[e.g.][]{Morison_2000,Boyd_2002,McGeehan_2012,Myers_2005}.
 Coastal currents play important roles in shelf dynamics and shelf-basin interactions, redistributing both fresh water and heat through mixing and entrainment of deeper waters \citep[e.g.][]{Carmack_1989,Rudels_1999,Ekwurzel_2001}.
 Buoyancy delivered by rivers also affects the onset of sea ice formation in winter and melt in spring and summer \citep[e.g.][]{Weatherly_1996}.
 Water with lower salinity freezes at higher temperatures, and therefore does not have to be cooled as much as higher salinity water to freeze.
 Thus, for a warming and freshening Arctic Ocean, the onset of freezing may be partially buffered against regional warming in areas highly influenced by streamflow.
-However, the earlier sea ice freeze-up enabled by low sea surface salinity (SSS) also reduces the amount of heat the upper ocean can lose in the, counteracting the impact freshening has on sea ice development \citep{Weatherly_1996,Morison_2012}.
+However, the earlier sea ice freeze-up enabled by lower sea surface salinity (SSS) also reduces the amount of heat the upper ocean can lose in the fall, counteracting the impact freshening has on sea ice development \citep{Weatherly_1996,Morison_2012}.
 Streamflow is also important for maintaining the stratification of the Arctic Ocean \citep{Nummelin_2015}.
 Although warmer water exists at depth in the Arctic Ocean, stratification is maintained by the density gradient between the cold, fresh, mixed layer above and the more saline halocline and Atlantic water layers below \citep{Serreze_2006}.
-These stratifying processes limit the heat flux into the mixed layer from below.
+These stratifying processes limit the heat flux into the surface mixed layer from below.
 
 % [ocean / sea ice specific studies]
 The coastal streamflow flux has also been shown to be an important driver of dynamics in coupled ice-ocean models \citep[e.g.][]{Morison_2012,Lique_2015,Large_2009}.
 \citet{Newton_2008} applied observed climatological runoff from nine of the largest rivers within the Arctic basin in the Naval Postgraduate School (NPS) Arctic regional Model (NAME).
 Their study used passive Lagrangian flow tracers within their model to track the spatial distribution of runoff.
-They found the highest concentrations of river runoff along the Siberian coast.
+They found the highest concentrations of river runoff along the Siberian coast and identified that freshwater plumes originating as coastal streamflow entered the central Arctic along topographic boundaries.
 However, they went on to conclude that the coarse spatial resolution of their model (18 km) was a limiting factor in the interpretation of their results and that future studies evaluating the interaction of streamflow in the Arctic would benefit from higher spatial resolution and improved forcing datasets.
 Despite our understanding of the importance of river runoff in Arctic Ocean dynamics, \citet{Nummelin_2015} show that global climate models (GCMs) poorly represent the vertical structure of the Arctic Ocean, with many models failing to accurately reproduce the observed profiles of temperature and salinity in the upper 500 m of the central Arctic Ocean.
 They conclude that an accurate representation of the streamflow flux is a key step toward improving the performance of the ocean model components in these models.
 
-The Coordinated Ocean-ice Reference Experiments Corrected Inter-Annual Forcing (CIAF) Version 2.0, hereafter referred to as $CORE.v2$, is a widely used ocean model forcing dataset that includes observed runoff at a selection of coastal rivers from \citet{Dai_2009}.
+The Coordinated Ocean-ice Reference Experiments (CORE) Corrected Inter-Annual Forcing (CIAF) Version 2.0, hereafter referred to as $CORE.v2$, is a widely used ocean model forcing dataset that includes coastal streamflow estimates based on the dataset of \citet{Dai_2009}.
 A strength of the $CORE.v2$ dataset is that it provides observed monthly mean streamflow on a global 1$^{\circ}$ x 1$^{\circ}$ grid, blended with model results to fill temporal gaps and to provide streamflow estimates in ungauged areas.
 This blending approach may also be viewed as a weakness of the dataset as it introduces spatial and temporal discontinuities when observations are unavailable.
-As we will show in section \ref{sec:results}, these discontinuities are particularly severe in large ungauged areas such as Greenland and the Canadian Archipelago.
+As we will show in Section \ref{sec:results}, these discontinuities are particularly severe in large ungauged areas such as Greenland and the Canadian Archipelago.
 
 % [streamflow routing and other climate models that include coupled land-ocean dynamics]
-Most land surface components in Earth system models (ESMs), including the model used in RASM, do not include neighbor communication and therefore must utilize a separate routing scheme to transport streamflow across the land surface.
-This process of transporting streamflow across the land surface is referred to as streamflow routing.
+Most land surface components in Earth system models (ESMs), including the model used in RASM, do not include neighbor communication and therefore must utilize a separate scheme to transport streamflow across the land surface; this process is referred to as streamflow routing.
 There are two fundamental approaches to streamflow routing: cell-to-cell (CTC) and source-to-sink (STS).
 CTC routing models simulate streamflow by parameterizing the mass flux between neighboring grid cells, explicitly tracking the volume of streamflow from each grid cell to grid cell across the land surface.
 CTC routing methods, such as the River Transport Model (RTM) \citep{Branstetter_2003} have been applied globally in a number of GCMs, including in the Community Earth System Model (CESM).
-These CTC models have been shown to be difficult to parameterize across a range of spatial scales \citep{Sushama_2004}.
+Although CTC models may be more physically based than STS models, they have been shown to be difficult to parameterize across a range of spatial scales \citep{Sushama_2004}, limiting their applicability.
 STS routing methods do not explicitly track streamflow between grid cells; instead, they parameterize the distribution and travel time of runoff between source and outlet grid points.
 STS routing models \citep[e.g.][]{Lohmann_1996,Naden_1992}, akin to the RVIC model used in this study, have also been previously applied in coupled models \citep[e.g.][]{Olivera_2000}.
 In previous applications of STS routing models within coupled GCMs \citep[e.g.][]{Olivera_2000}, the streamflow routing has been applied at coarse spatial resolutions (greater than 200 km) and low-frequency coupling (e.g. daily).
@@ -254,7 +253,7 @@ In previous applications of STS routing models within coupled GCMs \citep[e.g.][
 New approaches to streamflow routing continue to be developed, adding new routing parameterizations and additional process representation.
 Examples from the recent literature include MOSART \citep{Li_2013}, CaMa-Flood \citep{Yamazaki_2009,Yamazaki_2014}, and mizuRoute \citep{Clark_2016}.
 While a number of routing schemes have been coupled to ESMs \citep[e.g.]{Sushama_2004,Olivera_2000,Li_2013}, they have rarely been specifically evaluated in terms of coupled land-ocean interactions.
-Those studies that have coupled streamflow routing with an ocean model have generally not been run at a sufficiently high spatial resolution required to resolve the coastal currents streamflow-shelf-basin exchange processes (e.g. eddies).
+Those studies that have coupled streamflow routing with an ocean model have generally not been run at a sufficiently high spatial resolution required to resolve the coastal currents streamflow-shelf-basin exchange processes (e.g. eddies) that are particularly important in the Arctic.
 In their recent synthesis of CMIP5 runoff dynamics, \citet{Bring_2015} conclude that a significant community effort should be made to improve the understanding and modeling of basin scale freshwater fluxes in coupled climate modeling.
 This argument is further echoed by \citet{Lique_2015} and \citet{Bring_2016} in their recent review papers on the representation of the Arctic hydrologic cycle in present-day hydrologic and climate models.
 
@@ -262,8 +261,8 @@ This argument is further echoed by \citet{Lique_2015} and \citet{Bring_2016} in 
 Numerous observational and modeling studies have explored the seasonal and inter-annual behavior of Arctic runoff.
 \citet{Lammers_2001} compiled the R-ArcticNET database, a regional hydrographic record of mean monthly streamflow observations that included over 3,700 streamflow gauges in the Pan-Arctic region.
 The collection of observations in R-ArcticNET was later used by \citet{Shiklomanov_2009} in their investigation of increasing river discharge in the largest Eurasian rivers and by \citet{Tan_2011} in their study of changes in spring snowmelt timing.
-\citet{Dai_2009} extended a coastal subset of the R-ArcticNET database through 2007 in their study estimating the continental runoff flux.
-\citet{Adam_2007}, \citet{Adam_2008}, \citet{Su_2005}, \citet{Slater_2007}, and \citet{Dai_2009} all have used uncoupled land surface models (LSMs), in conjunction with routing schemes to simulate streamflow across the pan-Arctic region.
+\citet{Dai_2009} extended a coastal subset of the R-ArcticNET database through 2007 as part of their study estimating the global continental runoff flux.
+\citet{Su_2005}, \citet{Adam_2007}, \citet{Slater_2007}, \citet{Adam_2008},and \citet{Dai_2009} all have used uncoupled land surface models (LSMs), in conjunction with routing schemes to simulate streamflow across the pan-Arctic region.
 These studies have led to an improved understanding of the terrestrial hydroclimate in the Arctic and how the seasonal streamflow dynamics in the Arctic basin respond to changes in climate and water management activities.
 
 % [Paper overview]
@@ -273,6 +272,7 @@ We describe the model simulations and observed data that we have used in Section
 In Section \ref{sec:results}, we present results from fully-coupled RASM simulations where the land and ocean are coupled via the streamflow flux.
 We compare simulated streamflow to observations at gauging locations and explore the role of the terrestrial freshwater flux in the high-resolution, eddy-resolving ice and ocean components within RASM.
 Section \ref{sec:discussion} includes a discussion on the role of streamflow in the Arctic climate system and the scientific advances and drawbacks associated using a source-to-sink routing model such as RVIC.
+In Section \ref{sec:discussion}, we also describe a new high-resolution coastal streamflow flux dataset for ocean modeling resulting from a fully-coupled RASM simulation.
 Finally, in Section \ref{sec:conclusions}, we provide our conclusions and highlight the potential for further research using RASM.
 
 \section{Models}
@@ -293,8 +293,8 @@ The reader will find additional information on the implementation of individual 
 \citet{Roberts_2015a} provide a description of the application of CICE, version 5, within RASM.
 \item POP: The Parallel Ocean Program model is a general circulation ocean model \citep{Smith_2010}.
 \citet{Maslowski_2012}, \citet{Roberts_2015a}, and \citet{Osinski_2016} provide a descriptions of the application of POP, version 2, within RASM.
-Of particular relevance to this study, POP uses a virtual salinity flux ($VSF$) to represent changes in ocean salinity due to surface fluxes of freshwater (runoff, precipitation, and evaporation).
-The $VSF$ is the equivalent amount of salt that would have to be added or removed to obtain the same change in salinity for a given fresh water flux.
+Of particular relevance to this study, POP uses a virtual salinity flux ($VSF$) to represent changes in ocean salinity due to surface fluxes of freshwater (runoff, ice melt, precipitation, and evaporation).
+The $VSF$ is the equivalent amount of salt that would have to be added or removed from a grid cell to obtain the same change in salinity for a given fresh water flux.
 It is calculated as
 \begin{equation}
   \label{eq:SaltFlux}
@@ -302,8 +302,9 @@ It is calculated as
 \end{equation}
 
 where $F_w$ is the sum of the freshwater fluxes from streamflow, precipitation, evaporation, and sea ice melting and freezing, and $S$ is the reference salinity, which is the surface salinity of the grid cell receiving the freshwater flux.
-The ocean model was initialized from a no-motion state, with climatological temperature and salinity fields derived from the Polar Science Center Hydrographic Climatology version 3.0 \citep{Steele_2001}.
-The model 75-year spin up consisted of an initial integration starting from 1948 through 1992 followed by a second integration from 1948 through 1979, both forced with $CORE.v2$.
+
+The POP model was initialized from a no-motion state, with climatological temperature and salinity fields derived from the University of Washington Polar Science Center Hydrographic Climatology version 3.0 \citep{Steele_2001}.
+The model 75-year spin up consisted of an initial integration starting from 1948 through 1992 followed by a second integration from 1948 through 1979, both forced with $CORE.v2$ (see Section \ref{sec:data}).
 
 \item VIC: The Variable Infiltration Capacity model \citep{Liang_1994} is a macroscale land surface hydrology model.
 \citet{Hamman_2016} provide a description of the application of VIC within RASM.
