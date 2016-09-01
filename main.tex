@@ -69,7 +69,7 @@
 \usepackage{amsmath}
 
 \usepackage{enumitem}
-% \usepackage{hyperref}
+\usepackage{hyperref}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Figures and Tables
 %
@@ -281,7 +281,7 @@ Finally, in section \ref{sec:conclusions}, we provide our conclusions and highli
 \subsection{RASM}
 \label{sec:rasm}
 The Regional Arctic System Model is a fully-coupled, high spatial and temporal resolution regional ESM applied over the pan-Arctic domain (Figure \ref{fig:rasm_domain}).
-Principal goals of the modeling project are to better understand the interaction between physical systems in the Arctic drainage basin, to advance understanding of past and present states of Arctic climate, and to improve seasonal to multi-decadal prediction capabilities of key Arctic indicators.
+The principal goals of the modeling project are to better understand the interaction between physical systems in the Arctic drainage basin, to advance understanding of past and present states of Arctic climate, and to improve seasonal to multi-decadal prediction capabilities of key Arctic indicators.
 Model components are coupled using the CESM coupled model framework and the CPL7 flux coupler \citep{Craig_2011}.
 Below, we provide a brief description of the five component models in RASM version 1.0 (Figure \ref{fig:rasm_coupling_schematic}).
 For the purposes of this paper, we are principally concerned with the coastal streamflow flux and its role in the Arctic Ocean system
@@ -289,8 +289,9 @@ Therefore, our description below mainly focuses on the streamflow and ocean mode
 The reader will find additional information on the implementation of individual component models in the RASM-specific references cited below.
 
 \begin{itemize}[leftmargin=+.5in]
-\item CICE: The Los Alamos Sea Ice model is a physically-based, dynamic sea ice model \citep{Hunke_2010}.
-\citet{Roberts_2015a} provide a description of the application of CICE, version 5, within RASM.
+\item CICE: \citet{Roberts_2015a} provided a description of the coupling of version 4 of the Los Alamos Sea Ice Model (CICE) in RASM.
+For this paper, we have upgraded  CICE in RASM to version 5 \citep{Hunke2015}, and incorporated the high-frequency sea ice coupling configuration of the developmental version of RASM described by \citet{Roberts_2015a}.
+With this upgrade, we have configured the new version of CICE to use anisotropic sea ice mechanics \citep{Tsamados2013}, level ice melt ponds \citep{Hunke2013}, and perhaps most importantly, a mushy-layer thermodynamics column model of \citet{Turner2015} with a prognostic salinity profile through the sea ice.
 \item POP: The Parallel Ocean Program model is a general circulation ocean model \citep{Smith_2010}.
 \citet{Maslowski_2012}, \citet{Roberts_2015a}, and \citet{Osinski_2016} provide a descriptions of the application of POP, version 2, within RASM.
 Of particular relevance to this study, POP uses a virtual salinity flux ($VSF$) to represent changes in ocean salinity due to surface fluxes of freshwater (runoff, ice melt, precipitation, and evaporation).
@@ -315,9 +316,12 @@ A complete description of the RVIC model is provided in section~\ref{sec:rvic}.
 \end{itemize}
 
 In RASM Version 1.0, the land, atmosphere, and runoff components share a 50-km near-equal-area North Pole stereographic grid mesh.
-The ocean and sea ice models share a 1/12$^{\circ}$ rotated stereographic grid mesh (Figure \ref{fig:rasm_domain}).
+The ocean and sea ice models share a 1/12$^{\circ}$ rotated sphere mesh (Figure \ref{fig:rasm_domain}).
 All model components are coupled every 20 minutes.
 This coupling configuration is described by \citet{Roberts_2015a}, where the sub-daily coupling frequency is shown to be important in reproducing observed inertial frequencies in the atmosphere-ice-ocean coupling cycle.
+For this study, have also improved the simulation of ice-ocean freshwater exchanges, made possible by using mushy-layer sea ice thermodynamics.
+In this latest version of RASM, both the sea ice and ocean models use a variable freezing temperature set by a liquidus relation \citep{Turner2015}, rather than using a set basal ice temperature of -1.8$^\circ$C, as is often assumed in fully coupled ESMs \citep [e.g.,][]{Jahn2012a}.
+This means that the freezing temperature of sea water is now determined by ocean salinity at the ice-water interface, rather than maintaining a constant value, thus significantly improving model physics associated with the ice-ocean salinity flux.
 
 \subsection{RVIC}
 \label{sec:rvic}
@@ -551,17 +555,16 @@ The differences in the SSTs between the two simulations are relatively small whe
 
 Within the Arctic system the largest and most direct impact of the streamflow flux is on near coastal SSS.
 This impact on SSS is expected to translate to changes in the ocean temperature as well as the sea ice distribution.
-Spatial maps of seasonally averaged SSS, SST, and sea ice height are shown in Figure \ref{fig:ocean_maps}.
+Spatial maps of seasonally averaged SSS, SST, and sea ice thickness differences are shown in Figure \ref{fig:ocean_maps} for the years 2000-2009. This period corresponds to a stable and relatively flat domain-wide SSS and SST signal for the $RASM_{CONTROL}$ case, after adjustment of the model following the 1979 initialization, as indicated in \ref{fig:ocean_timeseries}. In \ref{fig:ocean_maps}, indications of statistically significance are calculated with Welch’s two-sided t-test using lag-1 autocorrelation to estimate effective sample size following \citet{VonStorch1999} and \citet{Wilks2006}, stippled at for 95\% confidence interval.  For reference, the observed ice edge (15\% sea ice concentration contour) has been overlayed from the NOAA/NSIDC passive microwave sea-ice concentration climate record of \citep{Meier2013}.
 While regions outside of the Central Arctic are not significantly different between the two RASM simulations, the Central Arctic basin is shown to be between 1 and 6 ppt fresher in $RASM_{CONTROL}$ than in $RASM_{NOROF}$.
 The differences between the two simulations are largest in closed ocean basins (e.g. Hudson Bay) and along shallow shelves that are adjacent to the outlets of large rivers (e.g. Siberian Shelf and Beaufort Shelf).
 Outside the Central Arctic, particularly around the margins of Greenland and in Baffin Bay, there are also large areas where the SSS in $RASM_{CONTROL}$ is considerably lower than in $RASM_{NOROF}$.
-The differences in SSS between these two RASM simulations in these areas highlight the local and regional importance of streamflow as a driver of ocean dynamics.
-
-In the Central Arctic, sea ice height for the $RASM_{NOROF}$ simulation is higher in all seasons by up to 0.5 $\sim$ m, these differences are largest in the Laptev Sea and along the Kara Shelf, which receive streamflow from the three largest Eurasian rivers.
-The differences in sea ice height can be partially attributed to an earlier freeze-up in the $RASM_{CONTROL}$ simulation.
+The differences in SSS between these two RASM simulations in these areas highlight the local and regional importance of streamflow as a driver of ocean dynamics, and is coherent with the observed impact of increased runoff in the Arctic Ocean \citep [e.g.,][]{Morison2012}.
+In the Central Arctic, sea ice thickness for the $RASM_{NOROF}$ simulation is higher in all seasons by up to 0.5 $\sim$ m, these differences are largest in the Laptev Sea and along the Kara Shelf, which receive streamflow from the three largest Eurasian rivers.
+The differences in sea ice thickness can be partially attributed to an earlier freeze-up in the $RASM_{CONTROL}$ simulation.
 The freeze-up timing differences are closely related to the differences in SST, where $RASM_{NOROF}$ is colder in all seasons throughout the central Arctic.
 As we discussed in section \ref{sec:intro}, the earlier freeze-up reduces the amount of heat that can be lost by the ocean in the fall and, over the long-term, leads to reductions in sea ice volume.
-This result partially corroborates the findings of \citep{Morison_2012} insofar as they also indicated, from an observational perspective, that a fresher Arctic Ocean would have less sea ice. %
+This result partially corroborates the findings of \citep{Morison_2012} insofar as they also indicated, from an observational perspective, that a fresher Arctic Ocean would have less sea ice.
 
 \subsection{Routing Processes}
 
@@ -616,7 +619,7 @@ In doing so, we conclude the following:
   We recognize that the representation of these quantities may be important to a range of biogeophysical processes in the near-surface ocean in coupled models.
   New, more complex, and physically based routing models, such as the recently developed MOSART model \citep{Li_2013}, offer some potential to provide additional process representation.
   The obvious challenge with these models is developing and tuning the required input parameters across large, data-spare regions.
-  \item The presence of runoff in the RASM ocean and sea ice system has led to decreased SSS, increased SSTs, and decreased sea ice height in the Central Arctic basin.
+  \item The presence of runoff in the RASM ocean and sea ice system has led to decreased SSS, increased SSTs, and decreased sea ice thickness in the Central Arctic basin.
   This result aligns with the findings of observational studies \citep[e.g.][]{Morison_2012}.
   \item We have produced a self-consistent high-resolution (spatial and temporal) coastal streamflow dataset for the Pan-Arctic region.
   Ungauged areas show particularly large improvements relative to $CORE.v2$.
@@ -734,22 +737,27 @@ Whiskers represent the full data range, circles represent the mean, horizontal l
 \label{fig:coastal_hydrographs}
 \end{figure}
 
+
 \clearpage
 \begin{figure}
 \noindent\includegraphics[width=40pc,natwidth=1]{ocean_combine_ts}
-\caption{Monthly time series (1980-2009) of domain-wide (left) and central arctic (right) streamflow (top), mean SSS (middle), and SST (bottom) for the $RASM_{CONTROL}$ (blue) and $RASM_{NOROF}$ (green). The dashed lines show a 12-month running mean.}
+\caption{Monthly time series (1980-2009) of domain-wide (left) and central arctic (right) streamflow (top), mean SSS (middle), and SST (bottom) for the $RASM_{CONTROL}$ (blue) and $RASM_{NOROF}$ (green). The dashed lines show a 12-month running mean. FIX THIS CAPTION TO INDICATE THAT ONLY $RASM_{CONTROL}$ IS ONLY SHOWN INT THE TOP ROW, AND FIX ASSOCIATED DISCUSSION - SEE COMMENTS FROM WIESLAW
+}
 \label{fig:ocean_timeseries}
 \end{figure}
 
 \clearpage
 \begin{figure}
 \noindent\includegraphics[width=40pc,natwidth=1]{ocean_combine}
-\caption{Seasonal difference ($RASM_{NOROF}$ - $RASM_{CONTROL}$) in mean sea surface salinity (top), sea surface temperature (middle), and sea ice height (bottom) (2000-2009). Stippling denotes differences that are statistically significant at the 95 percent confidence interval.}
+\caption{Seasonal difference ($RASM_{NOROF}$ - $RASM_{CONTROL}$) in mean sea surface salinity (top), sea surface temperature (middle), and sea ice thickness (bottom) (2000-2009). Stippling denotes differences that are statistically significant at the 95 percent confidence interval, and the magenta contour represents the observed 15\% sea ice concentration contour. }
 \label{fig:ocean_maps}
 \end{figure}
 
+
 % Tables
 \clearpage
+
+% ADD TABLE OF MODEL SIMULATIONS IN HERE
 
 \begin{table}
   \caption{RVIC model performance statistics for the seven rivers shown in Figure \ref{fig:rasm_domain}. The overlap statistic is calculated using normalized hydrographs whereas the bias and RMSE are calculated using the unadjusted hydrographs.}
