@@ -166,9 +166,6 @@ Monterey, CA, USA.}
 
 % >> Do NOT include any \begin...\end commands within
 % >> the body of the abstract.
-
-\begin{abstract}
-TODO:
 % The purpose of the abstract is twofold: (1) state the nature of the investigation and (2) summarize the important conclusions of this investigation. The abstract should be suitable for separate publication in an abstract journal and be adequate for indexing. Make sure to check for the following:
 %
 % It is set as a single paragraph.
@@ -176,6 +173,19 @@ TODO:
 % It does not include table or figure mentions.
 % If it has reference citations that are part of the sentence, they should be in roman type and have parentheses around the year; parenthetical reference citations will be deleted.
 % All abbreviations used in the abstract are defined.
+
+\begin{abstract}
+The coastal streamflow flux from the Arctic drainage basin is an important driver of dynamics in the coupled ice-ocean system.
+Comprising more than one-third of the total freshwater flux into the Arctic Ocean, streamflow is a key member of the regional and global freshwater cycle.
+To better represent the coupling of the streamflow flux to the ocean, we have developed and applied the RVIC streamflow routing model within the Regional Arctic System Model (RASM).
+The RASM is a high-resolution regional Earth System Model whose domain includes all of the Arctic drainage basin.
+In this paper, we introduce RVIC streamflow routing model, detailing its application within RASM and its advancements in terms of representing high-resolution streamflow processes.
+We evaluate model simulated streamflow relative to in-situ observations and demonstrate one method for improving model performance using a relatively simple parameter selection procedure.
+We also present a new, spatially- and temporally-consistent, high-resolution dataset of coastal freshwater fluxes for the Arctic drainage basin and surrounding areas that is based on a fully-coupled RASM simulation and intended for use in Arctic Ocean modeling applications.
+This dataset is evaluated relative to other coastal streamflow datasets commonly used by the ocean modeling community
+We demonstrate that the RASM simulated streamflow flux better represents the annual cycle than existing datasets, especially in ungauged areas.
+Finally, we assess the impact that streamflow has on the coupled ice-ocean system, finding that the presence of streamflow leads to reduced sea surface salinity increased sea surface temperatures, and decreased sea ice thickness.
+
 \end{abstract}
 
 %% ------------------------------------------------------------------------ %%
@@ -241,13 +251,13 @@ As we will show in section \ref{sec:results}, these discontinuities are particul
 
 % [Paper overview]
 In this paper we describe the RVIC streamflow routing scheme implemented within the recently developed Regional Arctic System Model (RASM) \citep{Roberts_2015a,DuVivier_2016,Hamman_2016} to simulate the streamflow flux between the land and ocean model components.
-RVIC is named after the routing model that has typically been used with the Variable Infiltration Capacity [VIC] hydrologic model % BN: include VIC reference.
+RVIC is named after the routing model that has typically been used with the Variable Infiltration Capacity [VIC] hydrologic model \citep{Liang_1996}.
 We introduce the new RVIC streamflow routing model in section \ref{sec:models}, where we describe its parameterization of high-resolution streamflow routing as well as its coupling within RASM.
 Model simulations and input and comparison data sets are defined in section \ref{sec:data}.
 In section \ref{sec:results}, we evaluate RVIC simulated streamflow relative to in-situ observations and compare the regionally aggregated coastal streamflow flux to observation and model based datasets commonly used by the Arctic ocean and climate modeling communities.
 In section \ref{sec:discussion} we compare two RASM simulations, one with coastal runoff and the other without, to highlight the role and importance of an accurately representation of streamflow in coupled climate simulations in the Arctic region.
 In the same section we present a new, spatially- and temporally-consistent, high-resolution dataset of coastal freshwater fluxes for the Arctic drainage basin and surrounding areas that is based on a fully-coupled RASM simulation and intended for use in Arctic Ocean modeling applications.
-Finally, in section \ref{sec:conclusions}, we provide our conclusions and highlight the potential for further research using RASM. % BN: Not a fan of forward looking conclusions as that work may never happen. Papers should be self-contained.
+Finally, in section \ref{sec:conclusions}, we provide our conclusions and highlight the advancements offered by the RVIC model and the associated coastal streamflow flux dataset.
 
 \section{Models}
 \label{sec:models}
@@ -256,7 +266,7 @@ Finally, in section \ref{sec:conclusions}, we provide our conclusions and highli
 \label{sec:rasm}
 The Regional Arctic System Model is a fully-coupled, high spatial and temporal resolution, regional Earth system model (ESM) applied over the pan-Arctic domain (Figure \ref{fig:rasm_domain}).
 The principal goals for the development of RASM are 1) to better understand the interaction between physical systems in the Arctic drainage basin; 2) to advance understanding of past and present states of Arctic climate; and 3) to improve seasonal to multi-decadal prediction capabilities of key Arctic indicators.
-Model components are coupled using the Community Earth System Model (CESM) coupled model framework and the CPL7 flux coupler \citep{Craig_2011}. % BN: CESM mention needs reference
+Model components are coupled using the Community Earth System Model \citep[CESM; ][]{Hurrell_2013} coupled model framework and the CPL7 flux coupler \citep{Craig_2011}.
 Below, we provide a brief description of the five component models in RASM version 1.0 (Figure \ref{fig:rasm_coupling_schematic}).
 For the purposes of this paper, we are principally concerned with the representation of the coastal streamflow flux and its role in the Arctic Ocean system.
 Therefore, our RASM description focuses on the streamflow and ocean model components.
@@ -277,9 +287,6 @@ The virtual salinty flux is calculated as
 \end{equation}
 
 where $F_w$ is the sum of the freshwater fluxes from streamflow, precipitation, evaporation, and sea ice melting and freezing, and $S$ is the reference salinity, which is the surface salinity of the grid cell receiving the freshwater flux.
-
-POP was initialized from a no-motion state with climatological temperature and salinity fields derived from the University of Washington Polar Science Center Hydrographic Climatology version 3.0 \citep{Steele_2001}.
-The 75-year ice-ocean spin-up consisted of an initial integration starting from 1948 through 1992 followed by a second integration from 1948 through 1979, both forced with $CORE.v2$ (see section \ref{sec:data}). % BN : I would collect initialization information for all model components in a single location as part of the Model Simulations section and move these two sentences to that section.
 
 \item VIC: The Variable Infiltration Capacity model \citep{Liang_1994} is a macroscale land surface hydrology model.
 \citet{Hamman_2016} provide a description of the application of VIC within RASM.
@@ -314,7 +321,7 @@ New approaches to streamflow routing continue to be developed, adding new routin
 Recent examples include MOSART \citep{Li_2013}, CaMa-Flood \citep{Yamazaki_2009,Yamazaki_2014}, and mizuRoute \citep{Clark_2016}.
 While a number of routing schemes have been coupled to ESMs \citep[e.g.][]{Sushama_2004,Olivera_2000,Li_2013}, they have rarely been specifically evaluated in terms of coupled land-ocean interactions.
 Furthermore, coupled streamflow routing and ocean models have generally not been implemented at a spatial resolution that is sufficient to resolve the coastal currents and streamflow-shelf-basin exchange processes (e.g. eddies) that are particularly important in the Arctic.
-In their recent synthesis of CMIP5 runoff dynamics, \citet{Bring_2015} conclude that a significant community effort is required to improve the understanding and modeling of basin scale freshwater fluxes in coupled climate modeling. % BN : Explain acronyms when first used (CMIP5)
+In their recent synthesis of the Coupled Model Intercomparison Project \citep[CMIP5; ][]{Taylor_2012} runoff dynamics, \citet{Bring_2015} conclude that a significant community effort is required to improve the understanding and modeling of basin scale freshwater fluxes in coupled climate modeling.
 This argument is echoed by \citet{Lique_2015} and \citet{Bring_2016} in their recent review papers on the representation of the Arctic hydrologic cycle in present-day hydrologic and climate models.
 
 The RVIC streamflow routing model is a modified version of the routing model typically used to post-process VIC model output \citep{Lohmann_1996, Lohmann_1998a}.
@@ -441,17 +448,18 @@ The final velocity and diffusivity parameters, 0.6 m/s and 3,000 m\textsuperscri
 
 We present results from two fully-coupled RASM simulations, the baseline ($RASM_{CONTROL}$) and a modified simulation (without the streamflow flux; $RASM_{NOROF}$), using RASM version 1.0, each using ERA-Interim boundary conditions (Table \ref{table:simulations}).
 In addition, to highlight the impact of the calibration procedure we include results from an offline RVIC simulation, $RVIC_{FAST}$, forced with VIC discharge from $RASM_{CONTROL}$.
-All three simulations were run from September 1, 1979 through December 31, 2009.
+All three simulations were run from September 1, 1979 through December 31, 2014.
 For the RASM simulations, we focus our analysis on the period January 1, 1990 through December 31, 2009, allowing for a 10-year model spin-up of the coupled system.
-Both RASM simulations began with the same initial state \citep[see ][]{Hamman_2016} and use identical land, atmosphere, ocean, and sea ice model configurations. % BN I would move the POP initialization discussion to here.
+Both RASM simulations began with the same initial state \citep[see ][]{Hamman_2016} and use identical land, atmosphere, ocean, and sea ice model configurations.
+POP was initialized from a no-motion state with climatological temperature and salinity fields derived from the University of Washington Polar Science Center Hydrographic Climatology version 3.0 \citep{Steele_2001}.
+The 75-year ice-ocean spin-up consisted of an initial integration starting from 1948 through 1992 followed by a second integration from 1948 through 1979, both forced with $CORE.v2$ (see below).
 
 We compare our model simulated streamflow to in-situ streamflow observations in the \citet{Dai_2009} dataset, hereafter referred to as $D2009$.
 This dataset provides mean monthly streamflow observations at the most downstream gauging location for more than 50 individual river basins within the RASM domain and analysis period.
 Temporal gaps in the observed data record were filled by \citet{Dai_2009} using a combination of linear regression and model derived streamflow fluxes (from the Community Land Model, version 3), forced with observed meteorology.
 In section \ref{sec:discussion}, we also compare the RASM coastal streamflow flux to $CORE.v2$ \citep{Large_2009} and the combined Greenland freshwater discharge estimates from $Bamber_{GR}$ \citep{Bamber_2012}.
 The $CORE.v2$ runoff data was also constructed by \citet{Dai_2009} using the same observations as in $D2009$.
-This dataset was further blended with model estimates to fill in ungauged areas and was adjusted to close the global water budget % BN : What is "This dataset". Is that CORE or D2009
-and is frequently used as a forcing dataset for global and regional ocean modeling.
+$CORE.v2$ was further blended with model estimates to fill in ungauged areas and was adjusted to close the global water budget and is frequently used as a forcing dataset for global and regional ocean modeling.
 $CORE.v2$ is available at a monthly timestep and a 1$^{\circ}$ grid resolution.
 We also use data from the high-resolution (11 km) regional atmospheric climate model (RACMO2) applied over Greenland, hereafter referred to as $Bamber_{GR}$.
 This dataset provides the best-known freshwater discharge estimates for Greenland and is comprised of monthly means for the runoff and solid ice flux for the period 1958-2010.
@@ -544,14 +552,14 @@ The differences in the SSTs between the two simulations are relatively small whe
 
 Within the Arctic Ocean, the largest and most direct impact of the streamflow flux is on near coastal SSS.
 This impact on SSS is expected to translate to changes in the ocean temperature as well as the sea ice distribution.
-Spatial maps of seasonally averaged SSS, SST, and sea ice thickness differences are shown in Figure \ref{fig:ocean_maps} for the years 2000-2009. This period corresponds to a stable and relatively flat domain-wide SSS and SST signal for the $RASM_{CONTROL}$ case, after adjustment of the model following the 1979 initialization, as indicated in Figure \ref{fig:ocean_timeseries}. % BN : We have not really explained the "1979" initialization other than for POP
-In Figure \ref{fig:ocean_maps}, statistical significance for the difference between the two RASM simulations is calculated with Welch’s two-sided t-test using lag-1 autocorrelation to estimate effective sample size following \citet{VonStorch1999} and \citet{Wilks2006} and stippled at for 95\% confidence interval. % BN : Something is missing here. This is not a grammatical sentence as-is ("at for")
+Spatial maps of seasonally averaged SSS, SST, and sea ice thickness differences are shown in Figure \ref{fig:ocean_maps} for the years 2000-2009. This period corresponds to a stable and relatively flat domain-wide SSS and SST signal for the $RASM_{CONTROL}$ case, after adjustment of the model following the 1979 initialization, as indicated in Figure \ref{fig:ocean_timeseries}.
+
+In Figure \ref{fig:ocean_maps}, statistical significance for the difference between the two RASM simulations is calculated with Welch’s two-sided t-test using lag-1 autocorrelation to estimate effective sample size following \citet{VonStorch1999} and \citet{Wilks2006} and stippled at the 95\% confidence interval.
 For reference, the observed ice edge (15\% sea ice concentration contour) has been overlayed from the NOAA/NSIDC passive microwave sea-ice concentration climate record of \citep{Meier2013}.
 While regions outside of the Central Arctic are not significantly different between the two RASM simulations, the Central Arctic basin is shown to be between 1 and 6 ppt fresher in $RASM_{CONTROL}$ than in $RASM_{NOROF}$.
 The differences between the two simulations are largest in closed ocean basins (e.g. Hudson Bay) and along shallow shelves that are adjacent to the outlets of large rivers (e.g. Siberian Shelf and Beaufort Shelf).
 Outside the Central Arctic, particularly around the margins of Greenland and in Baffin Bay, there are also large areas where the SSS in $RASM_{CONTROL}$ is considerably lower than in $RASM_{NOROF}$.
 The differences in SSS between these two RASM simulations in these areas highlight the local and regional importance of streamflow as a driver of ocean dynamics, and are coherent with the observed impact of increased runoff in the Arctic Ocean \citep [e.g.][]{Morison_2012}.
-% This would be a proper place to comment on the use of restoring to sea surface salinity climatology in ocean models, which does not provide spatial details and termporal variability, due to limited observations. WM comment
 In the Central Arctic, sea ice thickness for the $RASM_{NOROF}$ simulation is higher in all seasons by up to $\sim$0.5 m.
 These differences are largest in the Laptev Sea and along the Kara Shelf, which receive streamflow from the three largest Eurasian rivers.
 The differences in sea ice thickness can be partially attributed to an earlier freeze-up in the $RASM_{CONTROL}$ simulation.
@@ -639,7 +647,7 @@ In doing so, we conclude the following:
 \begin{acknowledgments}
 This research was supported under United States Department of Energy (DOE) grants DE-FG02-07ER64460 and DE-SC0006856 to the University of Washington, and DE-SC0005783 and DE-SC0005522 to the Naval Post Graduate School.
 Supercomputing resources were provided through the United States Department of Defense (DOD) High Performance Computing Modernization Program at the Army Engineer Research and Development Center and the Air Force Research Laboratory.
-The dataset described in this paper is publicly available via the University of Washington (https://digital.lib.washington.edu/researchworks). % BN : Is there a DOI for the data set?
+The dataset described in this paper is publicly available via the University of Washington (https://digital.lib.washington.edu/researchworks).
 \end{acknowledgments}
 
 %% ------------------------------------------------------------------------ %%
@@ -739,8 +747,7 @@ Whiskers represent the full data range, circles represent the mean, horizontal l
 \clearpage
 \begin{figure}
 \noindent\includegraphics[width=40pc,natwidth=1]{ocean_combine_ts}
-\caption{Monthly time series (1980-2009) of domain-wide (left) and central arctic (right) streamflow (top), mean SSS (middle), and SST (bottom) for the $RASM_{CONTROL}$ (blue) and $RASM_{NOROF}$ (green). The dashed lines show a 12-month running mean.
-% BN : This comment was still in the document: FIX THIS CAPTION TO INDICATE THAT ONLY $RASM_{CONTROL}$ IS ONLY SHOWN INT THE TOP ROW, AND FIX ASSOCIATED DISCUSSION - SEE COMMENTS FROM WIESLAW
+\caption{Monthly time series (1980-2009) of domain-wide (left) and central arctic (right) streamflow (top; $RASM_{CONTROL}$ only), mean SSS (middle), and SST (bottom) for the $RASM_{CONTROL}$ (blue) and $RASM_{NOROF}$ (green). The dashed lines show a 12-month running mean.
 }
 \label{fig:ocean_timeseries}
 \end{figure}
