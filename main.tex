@@ -144,7 +144,7 @@ University of Washington, Seattle, WA 98195-2700, USA.
 % \altaffilmark will produce footnote;
 % matching \altaffiltext will appear at bottom of page.
 
-\authors{Joseph Hamman\altaffilmark{1},
+\authors{Joseph Hamman\altaffilmark{1,4},
 Bart Nijssen\altaffilmark{1},
 Andrew Roberts\altaffilmark{2},
 Anthony Craig\altaffilmark{2},
@@ -156,6 +156,7 @@ University of Washington, Seattle, WA, USA.}
 \altaffiltext{2}{Department of Oceanography, Naval Postgraduate School,
 Monterey, CA, USA.}
 \altaffiltext{3}{Polish Institute of Oceanology, Sopot, Poland.}
+\altaffiltext{4}{National Center for Atmospheric Research, Boulder, Colorado, USA.}
 
 
 %% ------------------------------------------------------------------------ %%
@@ -277,7 +278,7 @@ The reader will find additional information regarding the implementation of indi
 For this paper, we have upgraded CICE in RASM to version 5 \citep{Hunke2015} and incorporated the high-frequency sea ice coupling configuration described by \citet{Roberts_2015a} as part of the developmental version of RASM.
 With this upgrade, we have configured the new version of CICE to use anisotropic sea ice mechanics \citep{Tsamados2013}, level ice melt ponds \citep{Hunke2013}, and perhaps most importantly, a mushy-layer thermodynamics column model of \citet{Turner2015} with a prognostic salinity profile through the sea ice.
 \item POP: The Parallel Ocean Program model is a general circulation ocean model \citep{Smith_2010}.
-\citet{Maslowski_2012}, \citet{Roberts_2015a}, and \citet{Osinski_2016} provide descriptions of the application of POP version 2, within RASM.
+\citet{Maslowski_2012}, \citet{Roberts_2015a} provide descriptions of the application of POP version 2, within RASM.
 Of particular relevance to this study, POP uses a virtual salinity flux ($VSF$) to represent changes in ocean salinity due to surface fluxes of fresh water (runoff, ice melt, precipitation, and evaporation).
 The $VSF$ is the equivalent amount of salt that would have to be added or removed from a model grid cell to obtain the same change in salinity as results from a given freshwater flux.
 The virtual salinity flux is calculated as
@@ -291,7 +292,7 @@ where $F_w$ is the sum of the freshwater fluxes from streamflow, precipitation, 
 \item VIC: The Variable Infiltration Capacity model \citep{Liang_1994} is a macroscale land surface hydrology model.
 \citet{Hamman_2016} provide a description of the application of VIC within RASM.
 \item WRF: The Weather Research and Forecasting atmospheric model \citep{Skamarock_2007} is a mesoscale meteorological model.
-\citet{Cassano_2016} provide a detailed description of the WRF model, version 3.2, as it is applied in RASM.
+\citet{DuVivier_2016} provide a detailed description of the WRF model, version 3.2, as it is applied in RASM.
 \item RVIC: The RVIC streamflow routing model is an adapted version of the \citet{Lohmann_1996} linear, source-to-sink routing model frequently used to route the runoff flux from the VIC model.
 A complete description of the RVIC model is provided in section~\ref{sec:rvic}.
 \end{itemize}
@@ -493,7 +494,7 @@ Consequently, the overlap statistic for these rivers is lower ($<$ 0.75).
 VIC underestimates the baseflow flux in these basins, particularly during the winter.
 Biases in the winter baseflow flux have previously been identified in VIC and other LSMs applied in the Arctic \citep{Slater_2007}.
 For most of the basins shown in Figure \ref{fig:hydrographs}, the timing of the spring freshet in the $RASM_{CONTROL}$ simulation occurs one month before $D2009$.
-This timing bias likely results from a spring and summer warm bias in the $RASM_{CONTROL}$ simulation \citep{Hamman_2016,Cassano_2016}, resulting in premature snowmelt and runoff.
+This timing bias likely results from a spring and summer warm bias in the $RASM_{CONTROL}$ simulation \citep{Hamman_2016}, resulting in premature snowmelt and runoff.
 Evidence for this can be found by comparing the timing of the peak streamflow in Figures \ref{fig:calibration_hydrographs} and \ref{fig:hydrographs}.
 Whereas the RASM simulations used for the calibration procedure had relatively small spring season temperature and snowmelt timing biases \citep{Hamman_2016}, the RASM simulations used here include a premature snowmelt leading to timing biases in the spring freshet.
 The one exception to this explanation is the Ob' River basin, where the spring peak occurs a month early in both the calibrated and $RASM_{CONTROL}$ (May vs. June).
@@ -580,7 +581,7 @@ While we have shown that RVIC, coupled within RASM, is able to capture the first
 For example, there is no mechanism in the RVIC model to account for non-linear routing processes such as overbank flow, wetlands, ice jams, reservoir operations, and industrial or agricultural withdrawals.
 As discussed, RVIC does not explicitly include the effects of regulation, even though the optimized routing parameters do account for some of the delays introduced by reservoir operation.
 \citet{Adam_2007} provide a detailed analysis of the influence of management on the annual hydrograph in the Lena, Yenisei, and Ob' Rivers.
-They showed fairly minor impacts on the annual hydrograph at the most downstream gauging locations, although larger impacts occurred upstream, in particular shifts in the seasonal hydrograph. % BN COMMENT: See online comment. The use of annual here is confusing.
+They showed fairly minor impacts on the shape of the seasonal hydrograph at the most downstream gauging locations, although larger impacts occurred upstream.
 Errors caused by not explicitly representing these processes are apparent in some basins in the RASM domain.
 For example, RVIC produces a naturalized hydrograph in the Nelson River (bottom of Figure \ref{fig:hydrographs}) that bears little resemblance to the observed hydrograph which is highly influenced by reservoir operations.
 Ice dam dynamics during the spring melt affect many of the high-latitude rivers and are also not represented using a linear routing model.
@@ -662,8 +663,512 @@ We also appreciate the feedback from two anonymous reviewers who have provided c
 %% ------------------------------------------------------------------------ %%
 %%  REFERENCE LIST AND TEXT CITATIONS
 
-\bibliographystyle{agu08}
-\bibliography{biblio}
+% \bibliographystyle{agu08}
+% \bibliography{biblio}
+\begin{thebibliography}{79}
+\providecommand{\natexlab}[1]{#1}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
+  \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url}\fi
+
+\bibitem[{\textit{Adam and Lettenmaier}(2008)}]{Adam_2008}
+Adam, J.~C., and D.~P. Lettenmaier (2008), Application of new precipitation and
+  reconstructed streamflow products to streamflow trend attribution in northern
+  eurasia, \textit{Journal of Climate}, \textit{21}(8), 1807--1828,
+  \doi{10.1175/2007JCLI1535.1}.
+
+\bibitem[{\textit{Adam et~al.}(2007)\textit{Adam, Haddeland, Su, and
+  Lettenmaier}}]{Adam_2007}
+Adam, J.~C., I.~Haddeland, F.~Su, and D.~P. Lettenmaier (2007), Simulation of
+  reservoir influences on annual and seasonal streamflow changes for the lena,
+  yenisei, and ob'rivers, \textit{Journal of Geophysical Research: Atmospheres
+  (1984--2012)}, \textit{112}(D24), \doi{10.1029/2007JD008525}.
+
+\bibitem[{\textit{Bamber et~al.}(2012)\textit{Bamber, van~den Broeke, Ettema,
+  Lenaerts, and Rignot}}]{Bamber_2012}
+Bamber, J., M.~van~den Broeke, J.~Ettema, J.~Lenaerts, and E.~Rignot (2012),
+  Recent large increases in freshwater fluxes from greenland into the north
+  atlantic, \textit{Geophysical Research Letters}, \textit{39}(19),
+  \doi{10.1029/2012GL052552}, l19501.
+
+\bibitem[{\textit{Boyd et~al.}(2002)\textit{Boyd, Steele, Muench, and
+  Gunn}}]{Boyd_2002}
+Boyd, T.~J., M.~Steele, R.~D. Muench, and J.~T. Gunn (2002), Partial recovery
+  of the arctic ocean halocline, \textit{Geophysical Research Letters},
+  \textit{29}(14), \doi{10.1029/2001GL014047}.
+
+\bibitem[{\textit{Branstetter and Erickson}(2003)}]{Branstetter_2003}
+Branstetter, M.~L., and D.~J. Erickson (2003), Continental runoff dynamics in
+  the community climate system model 2 (ccsm2) control simulation,
+  \textit{Journal of Geophysical Research: Atmospheres (1984--2012)},
+  \textit{108}(D17), \doi{10.1029/2002JD003212}.
+
+\bibitem[{\textit{Bring et~al.}(2015)\textit{Bring, Asokan, Jaramillo,
+  Jarsj{\"o}, Levi, Pietro{\'n}, Prieto, Rogberg, and Destouni}}]{Bring_2015}
+Bring, A., S.~M. Asokan, F.~Jaramillo, J.~Jarsj{\"o}, L.~Levi, J.~Pietro{\'n},
+  C.~Prieto, P.~Rogberg, and G.~Destouni (2015), Implications of freshwater
+  flux data from the cmip5 multi-model output across a set of northern
+  hemisphere drainage basins, \textit{Earth's Future},
+  \doi{10.1002/2014EF000296}.
+
+\bibitem[{\textit{Bring et~al.}(2016)}]{Bring_2016}
+Bring, A., et~al. (2016), Arctic terrestrial hydrology: A synthesis of
+  processes, regional effects, and research challenges, \textit{Journal of
+  Geophysical Research: Biogeosciences}, \textit{121}(3), 621--649,
+  \doi{10.1002/2015JG003131}, 2015JG003131.
+
+\bibitem[{\textit{Carmack et~al.}(1989)\textit{Carmack, Macdonald, and
+  Papadakis}}]{Carmack_1989}
+Carmack, E.~C., R.~W. Macdonald, and J.~E. Papadakis (1989), Water mass
+  structure and boundaries in the mackenzie shelf estuary, \textit{Journal of
+  Geophysical Research: Oceans}, \textit{94}(C12), 18,043--18,055,
+  \doi{10.1029/JC094iC12p18043}.
+
+% \bibitem[{\textit{Cassano et~al.}(in revision)\textit{Cassano, DuVivier,
+%   Maslowski, Roberts, Zeng, Hamman, Nijssen, and Brunke}}]{Cassano_2016}
+% Cassano, J., A.~DuVivier, W.~Maslowski, A.~Roberts, X.~Zeng, J.~Hamman,
+%   B.~Nijssen, and M.~Brunke (in revision), Atmospheric climate of the regional
+%   arctic system model, \textit{Journal of Climate}.
+
+\bibitem[{\textit{Clark et~al.}(2016)\textit{Clark, Viger, Markstrom, Hay,
+  Arnold, and Brekke}}]{Clark_2016}
+Clark, M.~P., R.~J. Viger, S.~L. Markstrom, L.~E. Hay, J.~R. Arnold, and L.~D.
+  Brekke (2016), mizuroute version 1: a river network routing tool for a
+  continental domain water resources applications, \textit{Geoscientific Model
+  Development}, \textit{9}(6), 2223.
+
+\bibitem[{\textit{Craig et~al.}(2011)\textit{Craig, Vertenstein, and
+  Jacob}}]{Craig_2011}
+Craig, A.~P., M.~Vertenstein, and R.~Jacob (2011), {A new flexible coupler for
+  earth system modeling developed for {CCSM}4 and {CESM}1},
+  \textit{International Journal of High Performance Computing Applications},
+  \textit{26}(1), 31--42, \doi{10.1177/1094342011428141}.
+
+\bibitem[{\textit{Dai et~al.}(2009)\textit{Dai, Qian, Trenberth, and
+  Milliman}}]{Dai_2009}
+Dai, A., T.~Qian, K.~E. Trenberth, and J.~D. Milliman (2009), {Changes in
+  Continental Freshwater Discharge from 1948 to 2004}, \textit{Journal of
+  Climate}, \textit{22}(10), 2773--2792, \doi{10.1175/2008jcli2592.1}.
+
+\bibitem[{\textit{Decharme et~al.}(2010)\textit{Decharme, Alkama, Douville,
+  Becker, and Cazenave}}]{Decharme_2010}
+Decharme, B., R.~Alkama, H.~Douville, M.~Becker, and A.~Cazenave (2010), Global
+  evaluation of the isba-trip continental hydrological system. part ii:
+  Uncertainties in river routing simulation related to flow velocity and
+  groundwater storage, \textit{Journal of Hydrometeorology}, \textit{11}(3),
+  601--617, \doi{10.1175/2010JHM1211.1}.
+
+\bibitem[{\textit{DuVivier et~al.}(2016)\textit{DuVivier, Cassano, Craig,
+  Hamman, Maslowski, Nijssen, Osinski, and Roberts}}]{DuVivier_2016}
+DuVivier, A.~K., J.~J. Cassano, A.~Craig, J.~Hamman, W.~Maslowski, B.~Nijssen,
+  R.~Osinski, and A.~Roberts (2016), Winter atmospheric buoyancy forcing and
+  oceanic response during strong wind events around southeastern greenland in
+  the regional arctic system model (rasm) for 1990–2010, \textit{Journal of
+  Climate}, \textit{29}(3), 975--994, \doi{10.1175/JCLI-D-15-0592.1}.
+
+\bibitem[{\textit{Ekwurzel et~al.}(2001)\textit{Ekwurzel, Schlosser, Mortlock,
+  Fairbanks, and Swift}}]{Ekwurzel_2001}
+Ekwurzel, B., P.~Schlosser, R.~A. Mortlock, R.~G. Fairbanks, and J.~H. Swift
+  (2001), River runoff, sea ice meltwater, and pacific water distribution and
+  mean residence times in the arctic ocean, \textit{Journal of Geophysical
+  Research: Oceans}, \textit{106}(C5), 9075--9092, \doi{10.1029/1999JC000024}.
+
+\bibitem[{\textit{Fichot et~al.}(2013)\textit{Fichot, Kaiser, Hooker, Amon,
+  Babin, B{\'e}langer, Walker, and Benner}}]{Fichot_2013}
+Fichot, C.~G., K.~Kaiser, S.~B. Hooker, R.~M. Amon, M.~Babin, S.~B{\'e}langer,
+  S.~A. Walker, and R.~Benner (2013), Pan-arctic distributions of continental
+  runoff in the arctic ocean, \textit{Scientific reports}, \textit{3},
+  \doi{10.1038/srep01053}.
+
+\bibitem[{\textit{Fread}(1992)}]{Fread_1992}
+Fread, D. (1992), Flow routing, chapter 10, handbook of hydrology.
+
+\bibitem[{\textit{Hamlet et~al.}(2013)\textit{Hamlet, Elsner, Mauger, Lee,
+  Tohver, and Norheim}}]{Hamlet_2013}
+Hamlet, A.~F., M.~M. Elsner, G.~S. Mauger, S.-Y. Lee, I.~Tohver, and R.~A.
+  Norheim (2013), An overview of the columbia basin climate change scenarios
+  project: Approach, methods, and summary of key results,
+  \textit{Atmosphere-ocean}, \textit{51}(4), 392--415,
+  \doi{10.1080/07055900.2013.819555}.
+
+\bibitem[{\textit{Hamman and Nijssen}(2015)}]{Hamman_2015}
+Hamman, J., and B.~Nijssen (2015), {RVIC: RVIC 1.1.0},
+  \doi{10.5281/zenodo.32620}.
+
+\bibitem[{\textit{Hamman et~al.}(2016)}]{Hamman_2016}
+Hamman, J., et~al. (2016), Land surface climate in the regional arctic system
+  model, \textit{Journal of Climate}, \textit{29}(18), 6543–6562,
+  \doi{10.1175/JCLI-D-15-0415.1}.
+
+\bibitem[{\textit{Hunke et~al.}(2013)\textit{Hunke, Hebert, and
+  Lecomte}}]{Hunke2013}
+Hunke, E.~C., D.~A. Hebert, and O.~Lecomte (2013), {Level-ice melt ponds in the
+  Los Alamos sea ice model, CICE}, \textit{Ocean Model.}, \textit{71}, 26--42,
+  \doi{10.1016/j.ocemod.2012.11.008}.
+
+\bibitem[{\textit{Hunke et~al.}(2015)\textit{Hunke, Lipscomb, Turner, Jeffery,
+  and Elliott}}]{Hunke2015}
+Hunke, E.~C., W.~H. Lipscomb, A.~K. Turner, N.~Jeffery, and S.~Elliott (2015),
+  {CICE : the Los Alamos Sea Ice Model Documentation and Software User's Manual
+  Version 5.1 LA-CC-06-012}, \textit{Tech. rep.}
+
+\bibitem[{\textit{Hurrell et~al.}(2013)}]{Hurrell_2013}
+Hurrell, J.~W., et~al. (2013), The community earth system model: a framework
+  for collaborative research, \textit{Bulletin of the American Meteorological
+  Society}, \textit{94}(9), 1339--1360, \doi{10.1175/BAMS-D-12-00121.1}.
+
+\bibitem[{\textit{Jahn et~al.}(2012)}]{Jahn2012a}
+Jahn, A., et~al. (2012), {Late-Twentieth-Century Simulation of Arctic Sea Ice
+  and Ocean Properties in the CCSM4}, \textit{J. Clim.}, \textit{25}(5),
+  1431--1452, \doi{10.1175/JCLI-D-11-00201.1}.
+
+\bibitem[{\textit{Jones}(1999)}]{Jones_1999}
+Jones, P.~W. (1999), {First- and Second-Order Conservative Remapping Schemes
+  for Grids in Spherical Coordinates}, \textit{Mon. Wea. Rev.},
+  \textit{127}(9), 2204--2210, \doi{10.1175/1520-0493(1999)127\textless
+  2204:fasocr\textgreater 2.0.co;2}.
+
+\bibitem[{\textit{Joughin et~al.}(2008)\textit{Joughin, Das, King, Smith,
+  Howat, and Moon}}]{Joughin_2008}
+Joughin, I., S.~B. Das, M.~A. King, B.~E. Smith, I.~M. Howat, and T.~Moon
+  (2008), Seasonal speedup along the western flank of the greenland ice sheet,
+  \textit{Science}, \textit{320}(5877), 781--783,
+  \doi{10.1126/science.1153288}.
+
+\bibitem[{\textit{Lammers et~al.}(2001)\textit{Lammers, Shiklomanov,
+  Vörösmarty, Fekete, and Peterson}}]{Lammers_2001}
+Lammers, R.~B., A.~I. Shiklomanov, C.~J. Vörösmarty, B.~M. Fekete, and B.~J.
+  Peterson (2001), Assessment of contemporary arctic river runoff based on
+  observational discharge records, \textit{Journal of Geophysical Research},
+  \textit{106}(D4), 3321, \doi{10.1029/2000jd900444}.
+
+\bibitem[{\textit{Lammers et~al.}(2007)\textit{Lammers, Pundsack, and
+  Shiklomanov}}]{Lammers_2007}
+Lammers, R.~B., J.~W. Pundsack, and A.~I. Shiklomanov (2007), Variability in
+  river temperature, discharge, and energy flux from the russian pan-arctic
+  landmass, \textit{Journal of Geophysical Research: Biogeosciences},
+  \textit{112}(G4), \doi{10.1029/2006JG000370}, g04S59.
+
+\bibitem[{\textit{Large and Yeager}(2009)}]{Large_2009}
+Large, W., and S.~Yeager (2009), The global climatology of an interannually
+  varying air--sea flux data set, \textit{Climate dynamics}, \textit{33}(2-3),
+  341--364, \doi{10.1007/s00382-008-0441-3}.
+
+\bibitem[{\textit{Lewis and Jones}(2000)}]{Lewis_2000}
+Lewis, E.~L., and E.~P. Jones (2000), \textit{The freshwater budget of the
+  Arctic Ocean}, vol.~70, Springer Science \& Business Media.
+
+\bibitem[{\textit{Li et~al.}(2013)\textit{Li, Wigmosta, Wu, Huang, Ke, Coleman,
+  and Leung}}]{Li_2013}
+Li, H., M.~S. Wigmosta, H.~Wu, M.~Huang, Y.~Ke, A.~M. Coleman, and R.~L. Leung
+  (2013), A physically based runoff routing model for land surface and earth
+  system models, \textit{Journal of Hydrometeorology}, \textit{14}(3),
+  808--828, \doi{10.1175/Jhm-D-12-015.1}.
+
+\bibitem[{\textit{Liang et~al.}(1994)\textit{Liang, Lettenmaier, Wood, and
+  Burges}}]{Liang_1994}
+Liang, X., D.~P. Lettenmaier, E.~F. Wood, and S.~J. Burges (1994), A simple
+  hydrologically based model of land surface water and energy fluxes for
+  general circulation models, \textit{Journal of Geophysical Research:
+  Atmospheres}, \textit{99}(D7), 14,415--14,428, \doi{10.1029/94JD00483}.
+
+\bibitem[{\textit{Liang et~al.}(1996)\textit{Liang, Wood, and
+  Lettenmaier}}]{Liang_1996}
+Liang, X., E.~F. Wood, and D.~P. Lettenmaier (1996), {Surface soil moisture
+  parameterization of the {VIC}-2L model: Evaluation and modification},
+  \textit{Global and Planetary Change}, \textit{13}(1-4), 195--206,
+  \doi{10.1016/0921-8181(95)00046-1}.
+
+\bibitem[{\textit{Lique et~al.}(2015)\textit{Lique, Holland, Dibike, Lawrence,
+  and Screen}}]{Lique_2015}
+Lique, C., M.~M. Holland, Y.~B. Dibike, D.~M. Lawrence, and J.~A. Screen
+  (2015), Modeling the arctic freshwater system and its integration in the
+  global system: Lessons learned and future challenges, \textit{Journal of
+  Geophysical Research: Biogeosciences}, \doi{10.1002/2015JG003120},
+  2015JG003120.
+
+\bibitem[{\textit{Lohmann et~al.}(1996)\textit{Lohmann, Nolte-Holube, and
+  Raschke}}]{Lohmann_1996}
+Lohmann, D., R.~Nolte-Holube, and E.~Raschke (1996), {A large-scale horizontal
+  routing model to be coupled to land surface parametrization schemes},
+  \textit{Tellus A}, \textit{48}(5), 708--721,
+  \doi{10.1034/j.1600-0870.1996.t01-3-00009.x}.
+
+\bibitem[{\textit{Lohmann et~al.}(1998{\natexlab{a}})\textit{Lohmann, Raschke,
+  Nijssen, and Lettenmaier}}]{Lohmann_1998a}
+Lohmann, D., E.~Raschke, B.~Nijssen, and D.~P. Lettenmaier
+  (1998{\natexlab{a}}), {Regional scale hydrology: {II}. Application of the
+  {VIC}-2L model to the Weser River Germany}, \textit{Hydrological Sciences
+  Journal}, \textit{43}(1), 143--158, \doi{10.1080/02626669809492108}.
+
+\bibitem[{\textit{Lohmann et~al.}(1998{\natexlab{b}})\textit{Lohmann, Raschke,
+  Nijssen, and Lettenmaier}}]{Lohmann_1998b}
+Lohmann, D., E.~Raschke, B.~Nijssen, and D.~P. Lettenmaier
+  (1998{\natexlab{b}}), Regional scale hydrology: I. formulation of the vic-2l
+  model coupled to a routing model, \textit{Hydrological Sciences Journal},
+  \textit{43}(1), 131--141, \doi{10.1080/02626669809492107}.
+
+\bibitem[{\textit{Maslowski and Walczowski}(2002)}]{Maslowski_2002}
+Maslowski, W., and W.~Walczowski (2002), Circulation of the baltic sea and its
+  connection to the pan-arctic region- a large scale and high-resolution
+  modeling approach, \textit{Boreal environment research}, \textit{7}(4),
+  319--326.
+
+\bibitem[{\textit{Maslowski et~al.}(2012)\textit{Maslowski, Kinney, Higgins,
+  and Roberts}}]{Maslowski_2012}
+Maslowski, W., J.~C. Kinney, M.~Higgins, and A.~Roberts (2012), {The Future of
+  Arctic Sea Ice}, \textit{Annual Review of Earth and Planetary Sciences},
+  \textit{40}(1), 625--654, \doi{10.1146/annurev-earth-042711-105345}.
+
+\bibitem[{\textit{Maslowski et~al.}(2014)\textit{Maslowski, Kinney, Okkonen,
+  Osinski, Roberts, and Williams}}]{Maslowski_2014}
+Maslowski, W., J.~C. Kinney, S.~R. Okkonen, R.~Osinski, A.~F. Roberts, and
+  W.~J. Williams (2014), The large scale ocean circulation and physical
+  processes controlling pacific-arctic interactions, in \textit{The Pacific
+  Arctic Region}, pp. 101--132, Springer.
+
+\bibitem[{\textit{McGeehan and Maslowski}(2012)}]{McGeehan_2012}
+McGeehan, T., and W.~Maslowski (2012), Evaluation and control mechanisms of
+  volume and freshwater export through the canadian arctic archipelago in a
+  high-resolution pan-arctic ice-ocean model, \textit{Journal of Geophysical
+  Research: Oceans (1978--2012)}, \textit{117}(C8), \doi{10.1029/2011JC007261}.
+
+\bibitem[{\textit{Meier}(2013)}]{Meier2013}
+Meier, W.~N. (2013), {Climate Data Record ( CDR ) Program Climate Algorithm
+  Theoretical Basis Document (C-ATBD) Passive Microwave Sea Ice Concentration},
+  \textit{Tech. Rep. CDRP-ATBD-0107}, National Oceanic and Atmospheric
+  Administration.
+
+\bibitem[{\textit{Mesa and Mifflin}(1986)}]{Mesa_1986}
+Mesa, O.~J., and E.~R. Mifflin (1986), On the relative role of hillslope and
+  network geometry in hydrologic response, in \textit{Scale problems in
+  hydrology}, pp. 1--17, Springer.
+
+\bibitem[{\textit{Morison et~al.}(2000)\textit{Morison, Aagaard, and
+  Steele}}]{Morison_2000}
+Morison, J., K.~Aagaard, and M.~Steele (2000), Recent environmental changes in
+  the arctic: a review, \textit{Arctic}, pp. 359--371.
+
+\bibitem[{\textit{Morison et~al.}(2012)\textit{Morison, Kwok, Peralta-Ferriz,
+  Alkire, Rigor, Andersen, and Steele}}]{Morison_2012}
+Morison, J., R.~Kwok, C.~Peralta-Ferriz, M.~Alkire, I.~Rigor, R.~Andersen, and
+  M.~Steele (2012), {Changing Arctic Ocean freshwater pathways},
+  \textit{Nature}, \textit{481}(7379), 66--70, \doi{10.1038/nature10705}.
+
+\bibitem[{\textit{Myers}(2005)}]{Myers_2005}
+Myers, P.~G. (2005), Impact of freshwater from the canadian arctic archipelago
+  on labrador sea water formation, \textit{Geophysical Research Letters},
+  \textit{32}(6), \doi{10.1029/2004GL022082}, l06605.
+
+\bibitem[{\textit{Naden}(1992)}]{Naden_1992}
+Naden, P.~S. (1992), Spatial variability in flood estimation for large
+  catchments: the exploitation of channel network structure,
+  \textit{Hydrological Sciences Journal}, \textit{37}(1), 53--71,
+  \doi{10.1080/02626669209492561}.
+
+\bibitem[{\textit{Nash}(1957)}]{Nash_1957}
+Nash, J. (1957), The form of the instantaneous unit hydrograph,
+  \textit{International Association of Scientific Hydrology, Publ}, \textit{3},
+  114--121.
+
+\bibitem[{\textit{Newton et~al.}(2008)\textit{Newton, Schlosser, Martinson, and
+  Maslowski}}]{Newton_2008}
+Newton, R., P.~Schlosser, D.~G. Martinson, and W.~Maslowski (2008), Freshwater
+  distribution in the arctic ocean: Simulation with a high-resolution model and
+  model-data comparison, \textit{Journal of Geophysical Research: Oceans
+  (1978--2012)}, \textit{113}(C5), \doi{10.1029/2007JC004111}.
+
+\bibitem[{\textit{Nijssen et~al.}(1997)\textit{Nijssen, Lettenmaier, Liang,
+  Wetzel, and Wood}}]{Nijssen_1997}
+Nijssen, B., D.~P. Lettenmaier, X.~Liang, S.~W. Wetzel, and E.~F. Wood (1997),
+  Streamflow simulation for continental-scale river basins, \textit{Water
+  Resources Research}, \textit{33}(4), 711--724, \doi{10.1029/96wr03517}.
+
+\bibitem[{\textit{Nummelin et~al.}(2015)\textit{Nummelin, Li, and
+  Smedsrud}}]{Nummelin_2015}
+Nummelin, A., C.~Li, and L.~H. Smedsrud (2015), Response of arctic ocean
+  stratification to changing river runoff in a column model, \textit{Journal of
+  Geophysical Research: Oceans}, \textit{120}(4), 2655--2675,
+  \doi{10.1002/2014JC010571}.
+
+\bibitem[{\textit{Olivera et~al.}(2000)\textit{Olivera, Famiglietti, and
+  Asante}}]{Olivera_2000}
+Olivera, F., J.~Famiglietti, and K.~Asante (2000), Global-scale flow routing
+  using a source-to-sink algorithm, \textit{Water Resources Research},
+  \textit{36}(8), 2197--2207, \doi{10.1029/2000WR900113}.
+
+% \bibitem[{\textit{Osinski et~al.}(Manuscript in Preparation)\textit{Osinski,
+%   Roberts, Maslowski, Cassano, Zeng, and Nijssen}}]{Osinski_2016}
+% Osinski, R., A.~Roberts, W.~Maslowski, J.~Cassano, X.~Zeng, and B.~Nijssen
+%   (Manuscript in Preparation), The ocean component of the regional arctic
+%   system model.
+
+\bibitem[{\textit{Perkins et~al.}(2007)\textit{Perkins, Pitman, Holbrook, and
+  J}}]{Perkins_2007}
+Perkins, S., A.~Pitman, N.~Holbrook, and M.~J (2007), Evaluation of the {AR4}
+  climate models' simulated daily maximum temperature, minimum temperature, and
+  precipitation over australia using probability density functions,
+  \textit{Journal of climate}, \textit{20}(17), 4356--4376,
+  \doi{10.1175/JCLI4253.1}.
+
+\bibitem[{\textit{Rabe et~al.}(2011)\textit{Rabe, Karcher, Schauer, Toole,
+  Krishfield, Pisarev, Kauker, Gerdes, and Kikuchi}}]{Rabe_2011}
+Rabe, B., M.~Karcher, U.~Schauer, J.~M. Toole, R.~A. Krishfield, S.~Pisarev,
+  F.~Kauker, R.~Gerdes, and T.~Kikuchi (2011), An assessment of arctic ocean
+  freshwater content changes from the 1990s to the 2006--2008 period,
+  \textit{Deep Sea Research Part I: Oceanographic Research Papers},
+  \textit{58}(2), 173--185, \doi{10.1016/j.dsr.2010.12.002}.
+
+\bibitem[{\textit{Roberts et~al.}(2015)\textit{Roberts, Craig, Maslowski,
+  Osinski, DuVIVIER, Hughes, Nijssen, Cassano, and Brunke}}]{Roberts_2015a}
+Roberts, A., A.~Craig, W.~Maslowski, R.~Osinski, A.~DuVIVIER, M.~Hughes,
+  B.~Nijssen, J.~Cassano, and M.~Brunke (2015), Simulating transient
+  ice–ocean ekman transport in the regional arctic system model and community
+  earth system model, \textit{Annals of Glaciology}, \textit{56}(69), 211,228,
+  \doi{10.3189/2015AoG69A760}.
+
+\bibitem[{\textit{Rudels et~al.}(1999)\textit{Rudels, Friedrich, and
+  Quadfasel}}]{Rudels_1999}
+Rudels, B., H.~J. Friedrich, and D.~Quadfasel (1999), The arctic circumpolar
+  boundary current, \textit{Deep Sea Research Part II: Topical Studies in
+  Oceanography}, \textit{46}(6–7), 1023 -- 1062,
+  \doi{10.1016/S0967-0645(99)00015-6}.
+
+\bibitem[{\textit{Serreze et~al.}(2006)}]{Serreze_2006}
+Serreze, M.~C., et~al. (2006), The large-scale freshwater cycle of the arctic,
+  \textit{Journal of Geophysical Research: Oceans (1978--2012)},
+  \textit{111}(C11), \doi{10.1029/2005JC003424}.
+
+\bibitem[{\textit{Sherman}(1932)}]{Sherman_1932}
+Sherman, L.~K. (1932), Streamflow from rainfall by the unit-graph method,
+  \textit{Eng. News Record}, \textit{108}, 501--505.
+
+\bibitem[{\textit{Shiklomanov and Lammers}(2009)}]{Shiklomanov_2009}
+Shiklomanov, A., and R.~Lammers (2009), Record russian river discharge in 2007
+  and the limits of analysis, \textit{Environmental Research Letters},
+  \textit{4}(4), 045,015, \doi{10.1088/1748-9326/4/4/045015}.
+
+\bibitem[{\textit{Shiklomanov et~al.}(2000)\textit{Shiklomanov, Shiklomanov,
+  Lammers, Peterson, and Vorosmarty}}]{Shiklomanov_2000}
+Shiklomanov, I.~A., A.~I. Shiklomanov, R.~B. Lammers, B.~J. Peterson, and C.~J.
+  Vorosmarty (2000), The dynamics of river water inflow to the arctic ocean, in
+  \textit{The Freshwater Budget of the Arctic Ocean}, edited by E.~L. Lewis,
+  E.~P. Jones, P.~Lemke, T.~D. Prowse, and P.~Wadhams, pp. 281--296, Springer
+  Netherlands, Dordrecht, \doi{10.1007/978-94-011-4132-1\_13}.
+
+\bibitem[{\textit{Skamarock and Klemp}(2007)}]{Skamarock_2007}
+Skamarock, W.~C., and J.~B. Klemp (2007), A time-split nonhydrostatic
+  atmospheric model for weather research and forecasting applications,
+  \textit{Journal of Computational Physics}, \textit{227}(7), 3465--3485,
+  \doi{10.1016/j.jcp.2007.01.037}.
+
+\bibitem[{\textit{Slater et~al.}(2007)\textit{Slater, Bohn, McCreight, Serreze,
+  and Lettenmaier}}]{Slater_2007}
+Slater, A.~G., T.~J. Bohn, J.~L. McCreight, M.~C. Serreze, and D.~P.
+  Lettenmaier (2007), A multimodel simulation of pan-arctic hydrology,
+  \textit{Journal of Geophysical Research: Biogeosciences}, \textit{112}(G4),
+  \doi{10.1029/2006JG000303}, g04S45.
+
+\bibitem[{\textit{Smith et~al.}(2010)}]{Smith_2010}
+Smith, R.~D., et~al. (2010), The parallel ocean program (pop) reference manual:
+  ocean component of the community climate system model (ccsm) and community
+  earth system model (cesm), \textit{Los Alamos National Laboratory Tech.
+  Report}, \textit{LAUR-10-01853}.
+
+\bibitem[{\textit{Steele et~al.}(2001)\textit{Steele, Morley, and
+  Ermold}}]{Steele_2001}
+Steele, M., R.~Morley, and W.~Ermold (2001), Phc: A global ocean hydrography
+  with a high-quality arctic ocean, \textit{Journal of Climate},
+  \textit{14}(9), 2079--2087,
+  \doi{10.1175/1520-0442(2001)014<2079:PAGOHW>2.0.CO;2}.
+
+\bibitem[{\textit{Su et~al.}(2005)\textit{Su, Adam, Bowling, and
+  Lettenmaier}}]{Su_2005}
+Su, F., J.~C. Adam, L.~C. Bowling, and D.~P. Lettenmaier (2005), Streamflow
+  simulations of the terrestrial arctic domain, \textit{Journal of Geophysical
+  Research: Atmospheres}, \textit{110}(D8), \doi{10.1029/2004JD005518}, d08112.
+
+\bibitem[{\textit{Sushama et~al.}(2004)\textit{Sushama, Laprise, Caya,
+  Larocque, and Slivitzky}}]{Sushama_2004}
+Sushama, L., R.~Laprise, D.~Caya, M.~Larocque, and M.~Slivitzky (2004), On the
+  variable-lag and variable-velocity cell-to-cell routing schemes for climate
+  models, \textit{Atmosphere-Ocean}, \textit{42}(4), 221--233,
+  \doi{10.3137/ao.420401}.
+
+\bibitem[{\textit{Tan et~al.}(2011)\textit{Tan, Adam, and
+  Lettenmaier}}]{Tan_2011}
+Tan, A., J.~C. Adam, and D.~P. Lettenmaier (2011), Change in spring snowmelt
+  timing in eurasian arctic rivers, \textit{Journal of Geophysical Research:
+  Atmospheres (1984--2012)}, \textit{116}(D3), \doi{10.1029/2010JD014337}.
+
+\bibitem[{\textit{Taylor et~al.}(2012)\textit{Taylor, Stouffer, and
+  Meehl}}]{Taylor_2012}
+Taylor, K.~E., R.~J. Stouffer, and G.~A. Meehl (2012), An overview of cmip5 and
+  the experiment design, \textit{Bulletin of the American Meteorological
+  Society}, \textit{93}(4), 485--498, \doi{10.1175/BAMS-D-11-00094.1}.
+
+\bibitem[{\textit{Tsamados et~al.}(2013)\textit{Tsamados, Feltham, and
+  Wilchinsky}}]{Tsamados2013}
+Tsamados, M., D.~L. Feltham, and A.~V. Wilchinsky (2013), {Impact of a new
+  anisotropic rheology on simulations of Arctic sea ice}, \textit{J. Geophys.
+  Res. Ocean.}, \textit{118}(1), 91--107, \doi{10.1029/2012JC007990}.
+
+\bibitem[{\textit{Turner and Hunke}(2015)}]{Turner2015}
+Turner, A.~K., and E.~C. Hunke (2015), {Journal of Geophysical Research:
+  Oceans}, \textit{J. Geophys. Res.}, \textit{120}, 1253--1275,
+  \doi{10.1002/2014JC010358}.
+
+\bibitem[{\textit{van Vliet et~al.}(2011)\textit{van Vliet, Ludwig, Zwolsman,
+  Weedon, and Kabat}}]{vanVliet_2011}
+van Vliet, M. T.~H., F.~Ludwig, J.~J.~G. Zwolsman, G.~P. Weedon, and P.~Kabat
+  (2011), Global river temperatures and sensitivity to atmospheric warming and
+  changes in river flow, \textit{Water Resources Research}, \textit{47}(2),
+  \doi{10.1029/2010WR009198}, w02544.
+
+\bibitem[{\textit{van Vliet et~al.}(2012)\textit{van Vliet, Yearsley, Franssen,
+  Ludwig, Haddeland, Lettenmaier, and Kabat}}]{vanVliet_2012}
+van Vliet, M. T.~H., J.~R. Yearsley, W.~H.~P. Franssen, F.~Ludwig,
+  I.~Haddeland, D.~P. Lettenmaier, and P.~Kabat (2012), Coupled daily
+  streamflow and water temperature modelling in large river basins,
+  \textit{Hydrology and Earth System Sciences}, \textit{16}(11), 4303--4321,
+  \doi{10.5194/hess-16-4303-2012}.
+
+\bibitem[{\textit{von Storch and Zwiers}(1999)}]{VonStorch1999}
+von Storch, H., and F.~W. Zwiers (1999), \textit{{Statistical Analysis in
+  Climate Research}}, 484 pp., Cambridge University Press.
+
+\bibitem[{\textit{Weatherly}(1996)}]{Weatherly_1996}
+Weatherly, E.~J., W. J.and~Walsh (1996), The effects of precipitation and river
+  runoff in a coupled ice-ocean model of the arctic, \textit{Climate Dynamics},
+  \textit{12}(11), 785--798, \doi{10.1007/s003820050143}.
+
+\bibitem[{\textit{Wilks}(2006)}]{Wilks2006}
+Wilks, D.~S. (2006), \textit{{Statistical methods in the atmospheric
+  sciences}}, 2nd ed., 627 pp., Academic Press, Burlington, MA ; London.
+
+\bibitem[{\textit{Wu et~al.}(2011)\textit{Wu, Kimball, Mantua, and
+  Stanford}}]{Wu_2011}
+Wu, H., J.~S. Kimball, N.~Mantua, and J.~Stanford (2011), {Automated upscaling
+  of river networks for macroscale hydrological modeling}, \textit{Water
+  Resour. Res.}, \textit{47}(3), \doi{10.1029/2009wr008871}.
+
+\bibitem[{\textit{Yamazaki et~al.}(2009)\textit{Yamazaki, Oki, Kanae
+  et~al.}}]{Yamazaki_2009}
+Yamazaki, D., T.~Oki, S.~Kanae, et~al. (2009), Deriving a global river network
+  map and its sub-grid topographic characteristics from a fine-resolution flow
+  direction map, \textit{Hydrology and Earth System Sciences}, \textit{13}(11),
+  2241, \doi{10.5194/hess-13-2241-2009}.
+
+\bibitem[{\textit{Yamazaki et~al.}(2014)\textit{Yamazaki, Sato, Kanae,
+  Hirabayashi, and Bates}}]{Yamazaki_2014}
+Yamazaki, D., T.~Sato, S.~Kanae, Y.~Hirabayashi, and P.~D. Bates (2014),
+  Regional flood dynamics in a bifurcating mega delta simulated in a global
+  river model, \textit{Geophysical Research Letters}, \textit{41}(9),
+  3127--3135, \doi{10.1002/2014GL059744}, 2014GL059744.
+
+\end{thebibliography}
+
 
 %% ------------------------------------------------------------------------ %%
 %
