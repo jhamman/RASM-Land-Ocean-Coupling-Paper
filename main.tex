@@ -326,6 +326,7 @@ Furthermore, coupled streamflow routing and ocean models have generally not been
 In their recent synthesis of the Coupled Model Intercomparison Project \citep[CMIP5; ][]{Taylor_2012} runoff dynamics, \citet{Bring_2015} conclude that a significant community effort is required to improve the understanding and modeling of basin scale freshwater fluxes in coupled climate modeling.
 This argument is further echoed by \citet{Lique_2015} and \citet{Bring_2016} in their recent review papers on the representation of the Arctic hydrologic cycle in present-day hydrologic and climate models.
 RVIC, itself, is a relatively simple approach to streamflow routing and intended to provide a first order coupling of the land hydrology with the ocean component within RASM with specific attention to the timing of the seasonal streamflow flux in a natural environment.
+While the first order streamflow routing processes represented by RVIC are sufficient for the purposes of our study, we acknowledge that representing additional processes (e.g. stream temperature or reservoir operations) may be important in other studies.
 
 The RVIC streamflow routing model is a modified version of the routing model typically used to post-process VIC model output \citep{Lohmann_1996, Lohmann_1998a}.
 The original \citet{Lohmann_1996} model has been used in many offline modeling studies from regional to global spatial scales at horizontal resolutions from 1/16$^{\circ}$ to 2$^{\circ}$ \citep[e.g.][]{Nijssen_1997,Lohmann_1998b,Su_2005,Hamlet_2013}.
@@ -572,6 +573,7 @@ As we discussed in section \ref{sec:intro}, the earlier freeze-up reduces the am
 This result partially corroborates the findings of \citep{Morison_2012} insofar as they also indicated, from an observational perspective, that a fresher Arctic Ocean would have less sea ice.
 
 \subsection{Routing Processes}
+\label{sec:rout_procs}
 
 We have shown that RVIC simulates the primary characteristics of the seasonal hydrograph across the Arctic region by capturing the differences in cold and warm season streamflow behavior.
 The RVIC model, coupled within RASM, effectively delivers streamflow to all coastal grid points draining to the POP model domain.
@@ -592,8 +594,14 @@ Previous studies \citep[e.g.][]{vanVliet_2011,vanVliet_2012}, using the original
 \citet{Lammers_2007} used observations to provide an estimate of the heat flux derived from streamflow from the Russian portion of the Arctic basin (0.2 $W/m^2$).
 While this heat flux into the Arctic ocean is unlikely to significantly impact the regional ocean energy budget, it may play an important role in the spring melt of sea ice near the outlet of large rivers.
 
+As we have discussed in detail above, the use of a STS routing model like RVIC, has been sufficient for our study, but may preclude its extension in certain applications.
+For applications where there is particular interest in additional processes related streamflow routing, more complex distributed CTC models may offer the required flexibility offering the ability to simulate streamflow at all points across the land surface.
+This feature allows for additional coupling to the land surface and more complex water management approaches.
+Additionally, the explicit spatial representation of streamflow in CTC models readily facilitates coupling thermodynamic models to the land surface and atmosphere.
+The integration of these features within coupled Earth system models are indeed a research horizon facing the hydrologic modeling community in the coming years.
+
 \subsection{Coastal Streamflow Flux Dataset}
-Beyond introducing the RVIC streamflow routing model, this paper also describes the associated coastal streamflow flux dataset which has been made publically available.
+Beyond introducing the RVIC streamflow routing model, this paper also describes the associated coastal streamflow flux dataset which has been made publicly available.
 This dataset includes daily streamflow at all 50-km coastal grid cells in the RASM domain.
 Relative to existing coastal streamflow flux datasets used by the ocean modeling community (e.g. $D2009$, and $CORE.v2$), this dataset includes the following improvements:
 
@@ -617,8 +625,8 @@ In doing so, we conclude the following:
 \begin{itemize}[leftmargin=+.5in]
   \item Linear routing models, such as RVIC, can be applied within coupled model frameworks to provide high temporal and spatial frequency runoff to ocean models.
   RVIC is computationally inexpensive and is relatively easy to parameterize, two features that add to its applicability in a wide range of coupled climate modeling applications.
-  \item Using the remapping and upscaling approach of IRFs described in section ~\ref{sec:remap}, we introduced a new method for developing IRFs using dissimilar flow direction and routing grids.
-  From an implementation perspective, this flexibility greatly expands RVIC's utiity for a range of modeling applications using arbitrarily shaped LSM grids, including irregularly shaped polygons (e.g. sub-basin scale hydrologic response units).
+  \item Using the remapping and upscaling approach of IRFs described in section \ref{sec:remap}, we introduced a new method for developing IRFs using dissimilar flow direction and routing grids.
+  From an implementation perspective, this flexibility greatly expands RVIC's utility for a range of modeling applications using arbitrarily shaped LSM grids, including irregularly shaped polygons (e.g. sub-basin scale hydrologic response units).
   Although not specifically discussed in this paper, we hypothesize that this method preserves the small-scale routing behavior while facilitating routing to be done on a coarser land surface grid.
   This point may warrant additional evaluation in follow-up studies.
   \item A relatively simple optimization procedure can provide significantly better routing model performance.
@@ -629,6 +637,7 @@ In doing so, we conclude the following:
   We recognize that the representation of these quantities may be important to a range of biogeophysical processes in the near-surface ocean in coupled models.
   New, more complex, and physically based routing models, such as the recently developed MOSART model \citep{Li_2013}, offer some potential to provide additional process representation.
   The obvious challenge with these models is developing and tuning the required input parameters across large, data-spare regions.
+  Addressing these points, we have included discussion in section \ref{sec:rout_procs} that outlines future directions for research in the areas of streamflow routing and coupled climate modeling.
   \item The presence of runoff in the RASM ocean and sea ice system has led to decreased SSS, increased SSTs, and decreased sea ice thickness in the Central Arctic basin.
   This result aligns with the findings of observational studies \citep[e.g.][]{Morison_2012}.
   \item We have produced a self-consistent high-resolution (spatial and temporal) coastal streamflow dataset for the Pan-Arctic region.
